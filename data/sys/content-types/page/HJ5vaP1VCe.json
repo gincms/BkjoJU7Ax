@@ -1,0 +1,15 @@
+{
+  "title": "Up",
+  "subtitle": "",
+  "slug": "up",
+  "section": "",
+  "url": "/up/",
+  "body": "I tend to eliminate repetitive tasks at the earliest possible opportunity. It's partly because I'm lazy, but mostly because I don't like wasting time or energy. In other words, I appreciate efficiency.\n\nWhen on the command line I'm frequent moving between directories, often going several levels deep before having to resurface to move into another. Far too often this means I end up having to type:\n\n```\ncd ../../../../\n```\n\nThe solution was to write a small bash function in my _~/.bash\\_profile_. This is it:\n\n```\nfunction up {\n\n  cwd=$(pwd);\n  cds=\"\";\n  i=0;\n                                                \n  if [ $1 ] && [ $1 -gt 0 ]\n  then\n\n    i=$1\n\n    # Add the levels to the string\n    while [ \"$i\" -ne \"0\" ]; do\n      cds=\"$cds../\";\n      i=$(expr $i - 1);\n    done\n\n    # Excute the command\n    cd \"$cds\"\n  else                                                                          \n    cd ../\n  fi\n                                                                                \n}\n```\n\nNow, instead of a `cd` plus multiple `../`, I can just type:\n\n```\nup 4\n```\n\nIt was easier to write the function than find a script that already did the same thing. Feel free to use it.",
+  "summary": "",
+  "blog": "1",
+  "created": "2017-03-15T13:55:49.000Z",
+  "updated": "2017-03-15T14:11:12.000Z",
+  "published": "2017-03-15T14:08:26.000Z",
+  "contentType": "page",
+  "id": "HJ5vaP1VCe"
+}

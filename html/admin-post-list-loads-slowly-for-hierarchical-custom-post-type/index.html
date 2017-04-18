@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> - Admin Post List Loads Slowly For Hierarchical Custom Post Type - </title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<header>
+  
+  Whitepaper modified header
+
+</header>
+<section id="primary-content">
+  
+<article>
+<h1>Admin Post List Loads Slowly For Hierarchical Custom Post Type</h1>
+
+<p>/admin-post-list-loads-slowly-for-hierarchical-custom-post-type/</p>
+<section class="content-body">
+<p>Here’s a problem I encountered a while ago. The list page for a custom post type in WordPress’s admin area started taking longer and longer to load, until one day it just started timing out completely. I googled all over the place and the <a href="http://wordpress.stackexchange.com/questions/96101/wordpress-custom-post-type-admin-page-really-slow">solutions</a> I kept encountering were the same, albeit in <a href="http://wordpress.stackexchange.com/questions/192165/solution-for-extremely-slow-pages-or-custom-post-in-wp-admin">different flavours</a>: set <code>hierarchical</code> to <code>false</code> in the custom post type’s definition.</p>
+<h3 id="back-in-the-real-world-">Back in the real world…</h3>
+<p>There are a few reasons why this “solution” is inadequate:</p>
+<ol>
+<li>It doesn’t actually offer any explanation of <em>why</em> the admin page grinds to halt when trying to list hierarchical post types. Instead, it quietly sweeps it under the carpet.</li>
+<li>In the case of conditionally setting <code>hierarchical</code> to <code>false</code> depending on whether or not <code>is_admin() == true</code>, it’s inconvenient and impractical. If a CPT has been made hierarchical, it’s likely because there are (or will be) relationships within collections of posts that need to be maintained. This is impossible to do if you disable the CPT’s hierarchical structure “only” in admin. It makes no sense.</li>
+<li>If you used a plugin (like CustomPress) to create the CPT, there’s no way to disable <code>hierarchical</code> conditionally, so option #2 is no option at all (unless you want to hack the plugin, which would be ill-advised).</li>
+</ol>
+<h3 id="oh-my-gawd-you-re-awesome-it-s-fixed-">Oh my gawd! You’re awesome! It’s fixed!</h3>
+<p>The types of responses I was seeing when the above was offered as a solution… Yawn. Meanwhile, I was thinking, <em>WTF? This is telling me nothing. I doubt my employer is going to accept disabling hierarchy for a CPT that has 20,000 posts, and many existing hierarchical relationships to boot.</em></p>
+<p>So, I thought, <em>fuck what these people are saying</em>. I need to find the real cause, and <em>then</em> maybe I can come up with and implement an acceptable solution. As is often the case, I had to go diving into the WordPress source code — one of my least favourite activities.</p>
+<h3 id="wp-_dropdown-_pages">wp_dropdown_pages</h3>
+<p>I narrowed down the problem to <code>/wp-admin/includes/class-wp-posts-list-table.php</code>. Specifically, this block, beginning around line 1100:</p>
+<pre><code>if ( $bulk )
+    $dropdown_args[&#39;show_option_no_change&#39;] =  __( &#39;— No Change —&#39; );
+
+/**
+ * Filter the arguments used to generate the Quick Edit page-parent drop-down.
+ *
+ * @since 2.7.0
+ *
+ * @see wp_dropdown_pages()
+ *
+ * @param array $dropdown_args An array of arguments.
+ */
+$dropdown_args = apply_filters( &#39;quick_edit_dropdown_pages_args&#39;, $dropdown_args );
+
+wp_dropdown_pages( $dropdown_args );
+</code></pre><p><code>wp_dropdown_pages</code> is used to render a drop-down list that’s used in the quick-edit menu. The page was hanging at this point, presumably because it was running a bunch of queries to retrieve all the pages. Here’s the thing: our custom post <em>didn’t even use</em> this drop-down list. I soon discovered that <code>wp_dropdown_pages</code> defaults to retrieving <em>all</em> pages and child pages, and lists the complete hierarchy. And, of course, it’s doing this for each post on the CPT’s list page. I guess it wasn’t considered what might happen when there are <em>thousands</em> of hierarchical pages!</p>
+<p>Fortunately, there&#39;s an accompanying filter (above) so that you can alter <code>wp_dropdown_pages</code>&#39;s behaviour. This is done by limiting the <code>depth</code> of the retrieval to only 1 level (learn more about it <a href="https://codex.wordpress.org/Function_Reference/wp_dropdown_pages">here</a>).</p>
+<pre><code>function alter_wp_dropdown_pages_args($args) {
+
+    // Because I only care about it happening on the list page for my special post type. 
+    if (is_admin() &amp;&amp; preg_match(&#39;@^/wp-admin/edit.php@&#39;, $_SERVER[&#39;REQUEST_URI&#39;]) &amp;&amp; $_GET[&#39;post_type&#39;] == &#39;my-special-post-type&#39;) {
+        $args[&#39;depth&#39;] = 1;
+    }
+}
+add_filter(&#39;quick_edit_dropdown_pages_args&#39;, &#39;alter_wp_dropdown_pages_args&#39;, 10, 1);
+</code></pre><p>As soon as I did this, the CPT’s list page started loading as quickly as any other page in admin. But this only became an issue in the first place because a menu was being loaded that isn’t actually used. Ideally, what I really want to do is prevent the quick-edit menu from loading at all. I discovered <a href="https://wordpress.org/support/topic/remove-quick-edit-from-custom-post-type">this</a> (once I knew what I was looking for):</p>
+<pre><code>function remove_quick_edit($actions) {
+    global $post;
+
+    if ($post-&gt;post_type == &#39;my-special-post-type&#39;) {
+        unset($actions[&#39;inline hide-if-no-js&#39;]);
+    }
+}
+add_filter(&#39;post_row_actions&#39;,&#39;remove_quick_edit&#39;, 10, 2);
+</code></pre><p>Either of the above solutions will eliminate the slow-loading post list in admin. I found that the issue was limited to hierarchical CPT’s that had a large number of posts. Those are ways to fix it.</p>
+
+</section>
+</article>
+
+</section>
+
+  
+  <!--<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script> -->
+</body>
+</html>

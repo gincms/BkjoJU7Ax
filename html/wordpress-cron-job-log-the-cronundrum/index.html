@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> - Wordpress Cron Job Log (The Cronundrum) - </title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<header>
+  
+  Whitepaper modified header
+
+</header>
+<section id="primary-content">
+  
+<article>
+<h1>Wordpress Cron Job Log (The Cronundrum)</h1>
+
+<p>/wordpress-cron-job-log-the-cronundrum/</p>
+<section class="content-body">
+<p>Like most people, I don’t like it when my basic needs aren’t met. Recently, I had the basic need to know when a WordPress [<a href="https://www.lucasrolff.com/wordpress/why-wp-cron-sucks/">pseudo</a>-]cron job had last run. It turns out, WordPress doesn’t provide a straightforward way of showing this information. In fact, it doesn’t even provide an in-built way to <em>log</em> this information. <em>WTF?</em></p>
+<h3 id="and-so-it-begins-">And so it begins…</h3>
+<p>First, to explain the <em>why</em>. We noticed our website was running into issues around the same time, on the same day of the week, on several occasions. It wasn’t happening weekly, but the recurring day and time of day was too frequent to be a coincidence. Naturally, my attention turned towards WP Cron.</p>
+<p>There’s a link above that explains some of the reasons WP Cron sucks, but one of the biggest reasons is that <em>it runs on <strong>every</strong> request</em>. Ugh. I understand the fundamental reason: <em>the real cron</em> is configured on the server, and given the multitude of environments in which WordPress might run, it can never be assumed that <em>the real cron</em> will be accessible and configurable by it.</p>
+<p>Checking for overdue cron tasks on every request is an ugly solution, but at least it kicks off cron jobs in a new process, I guess…</p>
+<h3 id="logging-the-unloggable-not-a-word-">Logging the unloggable (not a word)</h3>
+<p>After spending some quality time with <code>/wp-includes/cron.php</code> and <code>/wp-cron.php</code>, I had a few ideas about how I might be able to create a makeshift cron job logger:</p>
+<ul>
+<li>filter <code>cron_request</code></li>
+<li>filter <code>unschedule_event</code></li>
+<li>filter <code>schedule_event</code></li>
+</ul>
+<h4 id="filtering-cron_request">Filtering cron_request</h4>
+<p>The first option seemed like a no-brainer. The cron is (programmatically) started by a direct call to <code>spawn_cron</code>, or an indirect call to <code>wp_cron</code>. Within <code>spawn_cron</code>, the <code>cron_request</code> filters are applied. This looks like the right filter to use.</p>
+<p><em>No dice</em>. Filtering <code>cron_request</code>, was a bust. All that gets passed to the callback is the URL that was requested (i.e. the path to <code>wp-cron.php</code>), the current date/time (passed as <code>key</code> with the value of <code>$doing_wp_cron</code>) and an array of arguments that aren’t very useful for logging which cron tasks are actually being run. On to the second option.</p>
+<h4 id="filter-unschedule_event">Filter unschedule_event</h4>
+<p>I saw this block of code in <code>wp-cron.php</code> and was filled with hope:</p>
+<pre><code>// Check lock if ( $doing_cron_transient != $doing_wp_cron ) return;
+
+foreach ( $crons as $timestamp =&gt; $cronhooks ) {
+    if ( $timestamp &gt; $gmt_time )
+        break;
+
+    foreach ( $cronhooks as $hook =&gt; $keys ) {
+
+        foreach ( $keys as $k =&gt; $v ) {
+
+            $schedule = $v[&#39;schedule&#39;];
+
+            if ( $schedule != false ) {
+                $new_args = array($timestamp, $schedule, $hook, $v[&#39;args&#39;]);
+                call_user_func_array(&#39;wp_reschedule_event&#39;, $new_args);
+            }
+
+            wp_unschedule_event( $timestamp, $hook, $v[&#39;args&#39;] );
+
+            /**
+             * Fires scheduled events.
+             *
+             * @internal
+             * @since 2.1.0
+             *
+             * @param string $hook Name of the hook that was scheduled to be fired.
+             * @param array  $args The arguments to be passed to the hook.
+             */
+            do_action_ref_array( $hook, $v[&#39;args&#39;] );
+
+            // If the hook ran too long and another cron process stole the lock, quit.
+            if ( _get_cron_lock() != $doing_wp_cron )
+                return;
+        }
+    }
+}
+</code></pre><p>Notice the <code>wp_unschedule_event</code> call. I know that for both single and recurring cron tasks, this function is called. I also know there’s a <code>schedule_event</code> filter, so there <em>must</em> be an <code>unschedule_event</code> filter too, right? Don’t be stupid. <em>Of course there isn’t</em>, that would be too (consistent|easy|sensible|un-WP). If you’re looking for consistency, WordPress (and PHP, actually) is <em>not</em> the place to find it.</p>
+<p>So, to reiterate, there’s no <code>unschedule_event</code> filter. <em>WTF?!</em> I’m suddenly reminded of this illustration of <a href="http://commadot.com/wtf-per-minute/">good code vs. bad code</a>. Let’s move on.</p>
+<h4 id="an-idea-interjects-">An idea interjects!</h4>
+<p>After getting pissed off with WP for not using <code>apply_filters(&#39;unschedule_event&#39;)</code> (and probably getting distracted), I temporarily entertained the idea of just filtering <code>get_option</code> for requests for the <code>cron</code> option (yea, <a href="https://codex.wordpress.org/Plugin_API/Filter_Reference/option_(option_name">you can do that</a>)). Theoretically, it would only be called while performing actions related to the cron (one can dream), but it introduced the issue of knowing the context from which <code>get_option(&#39;cron&#39;)</code> had been called (i.e. during a cron run, an installation, loading of an admin page, etc.).</p>
+<p>I decided to use <code>debug_backtrace</code> to <em>trace back</em> through the call stack to figure it out. It yielded the results I wanted, more or less, but it felt too dirty and inefficient to filter <code>get_option</code>. Still, it was a useful exercise, as the backtrace code would come in handy later.</p>
+<h4 id="filtering-schedule_event">Filtering schedule_event</h4>
+<p>The <code>$timestamp</code> (next scheduled run time), <code>$hook</code> (cron job name) and an array of arguments all get passed to the filter callback — just what I need for logging. This is definitely the most promising of all the approaches so far.</p>
+<p>However, there’s still the issue of <em>context</em>. <code>apply_filters(&#39;schedule_event&#39;)</code> is called in <code>wp_schedule_single_event</code> and <code>wp_schedule_event</code>, but those functions aren’t only called when the WP Cron runs, they may also be called when a new task is being added, via a plugin like Crontrol, or while a plugin is being installed, or for any number of reasons from any plugin or theme.</p>
+<p>The solution was to take the code I’d sketched out while testing the filter for <code>get_option(&#39;cron&#39;)</code> and use it in my <code>schedule_event</code> filter callback to determine the likelihood that the cron is actually running. It looks something like this:</p>
+<pre><code>class My_Cron_Log_Class {
+
+    /* ...functions here... */
+
+    public function my_cron_schedule_filter_function($event) {
+
+        // I want to know what the entry point is so, before I look through, reverse the $debug_backtrace array
+        $backtrace = array_reverse(debug_backtrace(false), true);
+
+        // Certain files/functions should be present in the trace if this cron run is legit: wp-cron.php (file), wp-crontrol.php (file), wp_reschedule_event (func) wp_schedule_single_event (func)... 
+        $found_cron_call = false;
+        $rescheduled = false;
+        $single = false;
+        $call_to = false;
+        $call_origin = false;
+
+        // Found out what triggered the call...
+        foreach ($backtrace as $i =&gt; $trace) {
+
+            if (preg_match(&#39;/(wp-cron(trol)?.php)$/&#39;, $trace[&#39;file&#39;], $preg_matches)) {
+                $found_cron_call = $i;
+                $call_to = $preg_matches[0];
+            }
+
+            switch ($trace[&#39;function&#39;]) {
+
+                case &#39;wp_reschedule_event&#39;:
+                    $rescheduled = true;
+                    break;
+
+                case &#39;wp_schedule_single_event&#39;:
+                    $single = true;
+                    break;
+            }
+        }
+
+        if ($found_cron_call !== false &amp;&amp; ($rescheduled || $single)) {
+
+            $call_origin = &#39;auto_run&#39;;
+
+            if ($call_to == &#39;wp-crontrol.php&#39;) {
+                $call_origin = get_current_user_id();
+            }
+
+            // Table has a timestamp field which defaults to current date/time. Fill in the rest...
+            $task = array(
+                &#39;call_to&#39; =&gt; $call_to,
+                &#39;call_origin&#39; =&gt; $call_origin,
+                &#39;task_name&#39; =&gt; $event-&gt;hook,
+                &#39;next_run&#39; =&gt; date(&#39;Y-m-d h:i:s&#39;, $event-&gt;timestamp)
+            );
+            $this-&gt;log_task($task);
+        }
+
+        return $event;
+    }
+
+
+    private function log_task($task) {
+        global $wpdb;
+
+        $wpdb-&gt;insert(&#39;my_log_table&#39;, $task);
+        // Yay! Cron logged!
+    }
+
+    /* ... more functions here... */
+
+}
+</code></pre><p>I’m going to turn this into a plugin. It feels like something that should be available. The above won’t work if <code>DISABLE_WP_CRON</code> is set to <code>true</code>, but if this is the case, you don’t need such a plugin. Good on you.</p>
+
+</section>
+</article>
+
+</section>
+
+  
+  <!--<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script> -->
+</body>
+</html>

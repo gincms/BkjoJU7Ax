@@ -1,0 +1,15 @@
+{
+  "title": "Gutting Wordpress",
+  "subtitle": "",
+  "slug": "gutting-wordpress",
+  "section": "",
+  "url": "/gutting-wordpress/",
+  "body": "\nIt might seem strange to create a blog about a platform I detest; I spend enough time with WordPress in my day job, committing my spare time to it could be considered masochistic. Indeed, I’d rather be using [Ghost](https://ghost.org/).\n\nHowever, my time with WordPress has forced me to go burrowing through the source code to solve less common problems. I’m hoping I can offer something that might save someone else some time and hair-loss. Also, I thought it might be somewhat cathartic to experiment with different ways of making WordPress less of a bitch to work with. In some cases it means using WordPress features in a smarter way, in others, it means by-passing the WordPress way completely. I prefer the latter. It feels like a chance at a fresh start. In reality, though, it’s just an opportunity to hack. And who doesn’t love a good bit of hacking? I can’t promise that what you’ll see here will be pretty, but it’ll probably be interesting, and might even be useful. Especially if you’re developing on Wordpress.\n\n\n",
+  "summary": "",
+  "blog": "1",
+  "created": "2015-09-14T23:19:41.000Z",
+  "updated": "2017-02-10T21:22:08.000Z",
+  "published": "2015-09-14T23:19:41.000Z",
+  "contentType": "page",
+  "id": "S1vpv1E0x"
+}
