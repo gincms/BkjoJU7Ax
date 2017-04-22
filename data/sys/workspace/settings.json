@@ -2,7 +2,7 @@
   "site": {
     "name": "Prickly Dev",
     "tagline": "Work it.",
-    "description": "",
+    "description": "A dev(ish), blog-type thing.",
     "url": "https://pricklydev.work",
     "theme": "gin-whitepaper"
   }
