@@ -2,23 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title> - Wordpress Heartbeat - </title>
-  <link rel="stylesheet" href="css/main.css">
+  <title>Wordpress Heartbeat - </title>
+  <link rel="stylesheet" href="/gin-data/themes/gin-whitepaper/css/main.css">
 </head>
 <body>
-<header>
+<header class="hero">
+  <div class="hero-body">
+    <div class="container">
+     
+    <h1 class="title">
+      <a href="/wordpress-heartbeat/">Wordpress Heartbeat</a>
+    </h1>
+    
+ 
+    </div>
+  </div>
   
-  Whitepaper modified header
-
 </header>
-<section id="primary-content">
-  
-<article>
-<h1>Wordpress Heartbeat</h1>
-
-<p>/wordpress-heartbeat/</p>
-<section class="content-body">
-<p>A quick one, but worth covering. If you’ve found this post, you probably already know why the WordPress Heartbeat matters; likely you’ve noticed excessive calls to <code>wp-admin/admin-ajax.php</code>, so I won’t patronise you or waste your time by explaining the basics. If, on the other hand, you <em>don’t</em> know what the WordPress Hearbeat API is, or why it matters, please <a href="https://en-gb.wordpress.org/plugins/heartbeat-control/">read this</a>, but <strong>don’t</strong> install the suggested plugin, at least not before reading and considering what’s below.</p>
+<div class="container">
+  <section id="primary-content" class="content">
+    
+    <article>
+      <section class="content-body">
+      <p>A quick one, but worth covering. If you’ve found this post, you probably already know why the WordPress Heartbeat matters; likely you’ve noticed excessive calls to <code>wp-admin/admin-ajax.php</code>, so I won’t patronise you or waste your time by explaining the basics. If, on the other hand, you <em>don’t</em> know what the WordPress Hearbeat API is, or why it matters, please <a href="https://en-gb.wordpress.org/plugins/heartbeat-control/">read this</a>, but <strong>don’t</strong> install the suggested plugin, at least not before reading and considering what’s below.</p>
 <h3 id="hearbeat-control">Hearbeat Control</h3>
 <p>Most posts out there (like the one linked to above) will tell you that, if you want to alter the frequency of the WordPress heartbeat, you should install the <em>Heartbeat Control</em> plugin. This is fine, if you’re a non-technical user. However, if you have some technical knowledge and are comfortable modifying the <code>functions.php</code> file, it makes little sense to add yet another plugin to the stack when you can achieve the desired result by adding 5 lines of code to your <code>functions.php</code>:</p>
 <pre><code>function limit_heartbeat($settings) {
@@ -62,15 +68,12 @@ add_filter(&#39;heartbeat_settings&#39;, &#39;limit_heartbeat&#39;);
 <p>However, if all that’s required to add a specific piece of functionality is essentially a copy and paste of a tiny sample of code into your <code>functions.php</code> (as is the case here), it seems like overkill to reach for a plugin. The WordPress Heartbeat frequency alteration is the type of thing you’ll probably set once and never need to touch again. Why bother with a plugin?</p>
 <p>Each plugin you add to your WordPress site adds to the overhead. In some cases, that additional overhead is negligible, but often it’s not, and the cumulative effect can on occasion be crippling. Being selective — frugal, even — with the WordPress plugins you choose to use can save you a great deal of <a href="https://www.woothemes.com/2013/09/wordpress-plugins-ignorance/">trouble</a> further down the line.</p>
 
-</section>
-</article>
+      </section>
+    </article>
 
-</section>
+  </section>
+</div>
 
   
-  <!--<script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-      crossorigin="anonymous"></script> -->
 </body>
 </html>
