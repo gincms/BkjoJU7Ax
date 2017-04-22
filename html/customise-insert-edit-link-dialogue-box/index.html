@@ -2,23 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title> - Customise Insert/Edit Link Dialogue Box - </title>
-  <link rel="stylesheet" href="css/main.css">
+  <title>Customise Insert/Edit Link Dialogue Box - </title>
+  <link rel="stylesheet" href="/gin-data/themes/gin-whitepaper/css/main.css">
 </head>
 <body>
-<header>
+<header class="hero">
+  <div class="hero-body">
+    <div class="container">
+     
+    <h1 class="title">
+      <a href="/customise-insert-edit-link-dialogue-box/">Customise Insert/Edit Link Dialogue Box</a>
+    </h1>
+    
+ 
+    </div>
+  </div>
   
-  Whitepaper modified header
-
 </header>
-<section id="primary-content">
-  
-<article>
-<h1>Customise Insert/Edit Link Dialogue Box</h1>
-
-<p>/customise-insert-edit-link-dialogue-box/</p>
-<section class="content-body">
-<p>Recently, I had to create an easy way to select a custom post type (CPT) and insert it into a different CPT’s edit page. I’ve done this this type of thing before but, the last time I did, I took the approach of creating a replicable autocomplete field (allowing the user to add as many items as they want). Autocomplete made sense in this case because, overall, I think it made the post selection process faster. Implementation, however, was relatively slow. Why? Because I had to create:</p>
+<div class="container">
+  <section id="primary-content" class="content">
+    
+    <article>
+      <section class="content-body">
+      <p>Recently, I had to create an easy way to select a custom post type (CPT) and insert it into a different CPT’s edit page. I’ve done this this type of thing before but, the last time I did, I took the approach of creating a replicable autocomplete field (allowing the user to add as many items as they want). Autocomplete made sense in this case because, overall, I think it made the post selection process faster. Implementation, however, was relatively slow. Why? Because I had to create:</p>
 <ul>
 <li>the autocomplete input field</li>
 <li>the logic that handled replication</li>
@@ -131,15 +137,12 @@ add_action(&#39;admin_enqueue_scripts&#39;, &#39;my_funky_func&#39;);
 add_filter(&#39;wp_link_query_args&#39;, &#39;awesome_wp_link_filter&#39;, 99);
 </code></pre><p>And that’s it. When the custom modal is launched, it will only display a list of <code>my-special-post-type</code>s. It might not seem like a big deal, but when you’ve got 100,000+ rows in <code>wp_posts</code>, 20+ different post types, and there are only 50 posts of the CPT you’re after, it’s nice to be able to select from a subset rather than the whole set.</p>
 
-</section>
-</article>
+      </section>
+    </article>
 
-</section>
+  </section>
+</div>
 
   
-  <!--<script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-      crossorigin="anonymous"></script> -->
 </body>
 </html>
