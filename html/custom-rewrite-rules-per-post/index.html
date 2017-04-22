@@ -2,23 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title> - Custom Rewrite Rules Per Post - </title>
-  <link rel="stylesheet" href="css/main.css">
+  <title>Custom Rewrite Rules Per Post - </title>
+  <link rel="stylesheet" href="/gin-data/themes/gin-whitepaper/css/main.css">
 </head>
 <body>
-<header>
+<header class="hero">
+  <div class="hero-body">
+    <div class="container">
+     
+    <h1 class="title">
+      <a href="/custom-rewrite-rules-per-post/">Custom Rewrite Rules Per Post</a>
+    </h1>
+    
+ 
+    </div>
+  </div>
   
-  Whitepaper modified header
-
 </header>
-<section id="primary-content">
-  
-<article>
-<h1>Custom Rewrite Rules Per Post</h1>
-
-<p>/custom-rewrite-rules-per-post/</p>
-<section class="content-body">
-<p>I often feel like I’m coercing WordPress into doing my bidding. It makes me feel dirty. Never more has this been the case than when I was asked to find a way to allow post authors to customise the rewrite base for a custom post type (CPT). What does that mean exactly? It means that if a CPT was registered with:</p>
+<div class="container">
+  <section id="primary-content" class="content">
+    
+    <article>
+      <section class="content-body">
+      <p>I often feel like I’m coercing WordPress into doing my bidding. It makes me feel dirty. Never more has this been the case than when I was asked to find a way to allow post authors to customise the rewrite base for a custom post type (CPT). What does that mean exactly? It means that if a CPT was registered with:</p>
 <pre><code>register_post_type(&#39;my-special-post-type&#39;, array(
     // ...params...
     &#39;rewrite&#39; =&gt; array(
@@ -151,15 +157,12 @@ function add_my_special_rules() {
 <p>And this is my typical experience of WordPress. I think it allows you to do <em>too much</em>. In trying to be everything to everyone it has become as much a whore as the language it’s written in (looking at you, <em>PHP</em>). It’s up to developers to use it sensibly. This isn’t a massive problem for small sites. But when you’ve got thousands upon thousands of posts (across many post types) and millions of visitors, those “clever” workarounds, inefficient but functional solutions, and hacky fixes end up boxing you in, inevitably forcing you to refactor, rewrite, or create even more “clever” workarounds and hacks further down the line. I suspect I’ll also end up paying for this piece of work eventually.</p>
 <p>Technical debt is a bitch. And so is WordPress.</p>
 
-</section>
-</article>
+      </section>
+    </article>
 
-</section>
+  </section>
+</div>
 
   
-  <!--<script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-      crossorigin="anonymous"></script> -->
 </body>
 </html>
