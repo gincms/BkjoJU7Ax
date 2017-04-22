@@ -2,23 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title> - Admin Post List Loads Slowly For Hierarchical Custom Post Type - </title>
-  <link rel="stylesheet" href="css/main.css">
+  <title>Admin Post List Loads Slowly For Hierarchical Custom Post Type - </title>
+  <link rel="stylesheet" href="/gin-data/themes/gin-whitepaper/css/main.css">
 </head>
 <body>
-<header>
+<header class="hero">
+  <div class="hero-body">
+    <div class="container">
+     
+    <h1 class="title">
+      <a href="/admin-post-list-loads-slowly-for-hierarchical-custom-post-type/">Admin Post List Loads Slowly For Hierarchical Custom Post Type</a>
+    </h1>
+    
+ 
+    </div>
+  </div>
   
-  Whitepaper modified header
-
 </header>
-<section id="primary-content">
-  
-<article>
-<h1>Admin Post List Loads Slowly For Hierarchical Custom Post Type</h1>
-
-<p>/admin-post-list-loads-slowly-for-hierarchical-custom-post-type/</p>
-<section class="content-body">
-<p>Here’s a problem I encountered a while ago. The list page for a custom post type in WordPress’s admin area started taking longer and longer to load, until one day it just started timing out completely. I googled all over the place and the <a href="http://wordpress.stackexchange.com/questions/96101/wordpress-custom-post-type-admin-page-really-slow">solutions</a> I kept encountering were the same, albeit in <a href="http://wordpress.stackexchange.com/questions/192165/solution-for-extremely-slow-pages-or-custom-post-in-wp-admin">different flavours</a>: set <code>hierarchical</code> to <code>false</code> in the custom post type’s definition.</p>
+<div class="container">
+  <section id="primary-content" class="content">
+    
+    <article>
+      <section class="content-body">
+      <p>Here’s a problem I encountered a while ago. The list page for a custom post type in WordPress’s admin area started taking longer and longer to load, until one day it just started timing out completely. I googled all over the place and the <a href="http://wordpress.stackexchange.com/questions/96101/wordpress-custom-post-type-admin-page-really-slow">solutions</a> I kept encountering were the same, albeit in <a href="http://wordpress.stackexchange.com/questions/192165/solution-for-extremely-slow-pages-or-custom-post-in-wp-admin">different flavours</a>: set <code>hierarchical</code> to <code>false</code> in the custom post type’s definition.</p>
 <h3 id="back-in-the-real-world-">Back in the real world…</h3>
 <p>There are a few reasons why this “solution” is inadequate:</p>
 <ol>
@@ -67,15 +73,12 @@ add_filter(&#39;quick_edit_dropdown_pages_args&#39;, &#39;alter_wp_dropdown_page
 add_filter(&#39;post_row_actions&#39;,&#39;remove_quick_edit&#39;, 10, 2);
 </code></pre><p>Either of the above solutions will eliminate the slow-loading post list in admin. I found that the issue was limited to hierarchical CPT’s that had a large number of posts. Those are ways to fix it.</p>
 
-</section>
-</article>
+      </section>
+    </article>
 
-</section>
+  </section>
+</div>
 
   
-  <!--<script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-      crossorigin="anonymous"></script> -->
 </body>
 </html>
