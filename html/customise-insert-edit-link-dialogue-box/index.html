@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Customise Insert/Edit Link Dialogue Box - </title>
+  <title>Customise Insert/Edit Link Dialogue Box - Prickly Dev</title>
   <link rel="stylesheet" href="/gin-data/themes/gin-whitepaper/css/main.css">
 </head>
 <body>
@@ -23,33 +23,33 @@
     
     <article>
       <section class="content-body">
-      <p>Recently, I had to create an easy way to select a custom post type (CPT) and insert it into a different CPT’s edit page. I’ve done this this type of thing before but, the last time I did, I took the approach of creating a replicable autocomplete field (allowing the user to add as many items as they want). Autocomplete made sense in this case because, overall, I think it made the post selection process faster. Implementation, however, was relatively slow. Why? Because I had to create:</p>
-<ul>
-<li>the autocomplete input field</li>
-<li>the logic that handled replication</li>
-<li>the logic that managed the autocomplete behaviour (yes, it was necessary)</li>
-<li>the input sanitisation logic</li>
-<li>the AJAX request</li>
-<li>a <em>wp<em>ajax</em></em> function to handle the ajax request</li>
-<li>the code that would render the response</li>
-<li>the code that would parse the AJAX response, as well as update some page elements</li>
-</ul>
-<p>None of these steps were particularly difficult, and I could quite easily replicate them, but the approach felt like overkill this time round. Users just needed to be able to select a single instance of <em>one</em> CPT, very much like when adding a link to a post. This got me thinking and lead me to investigate using WordPress’s existing <em>Insert/Edit Link</em> modal that’s available via the visual editor.</p>
-<h3 id="a-little-less-work">A little less work</h3>
-<p>Making the Insert/Edit Link modal window available outside of the visual editor was simple: hook into the <code>admin_enqueue_scripts</code> and enqueue the <code>wp-link</code> script for the required page:</p>
-<pre><code>function my_funky_func() {
-    wp_enqueue_script(&#39;wp-link&#39;);
+      &lt;p&gt;Recently, I had to create an easy way to select a custom post type (CPT) and insert it into a different CPT’s edit page. I’ve done this this type of thing before but, the last time I did, I took the approach of creating a replicable autocomplete field (allowing the user to add as many items as they want). Autocomplete made sense in this case because, overall, I think it made the post selection process faster. Implementation, however, was relatively slow. Why? Because I had to create:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the autocomplete input field&lt;/li&gt;
+&lt;li&gt;the logic that handled replication&lt;/li&gt;
+&lt;li&gt;the logic that managed the autocomplete behaviour (yes, it was necessary)&lt;/li&gt;
+&lt;li&gt;the input sanitisation logic&lt;/li&gt;
+&lt;li&gt;the AJAX request&lt;/li&gt;
+&lt;li&gt;a &lt;em&gt;wp&lt;em&gt;ajax&lt;/em&gt;&lt;/em&gt; function to handle the ajax request&lt;/li&gt;
+&lt;li&gt;the code that would render the response&lt;/li&gt;
+&lt;li&gt;the code that would parse the AJAX response, as well as update some page elements&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;None of these steps were particularly difficult, and I could quite easily replicate them, but the approach felt like overkill this time round. Users just needed to be able to select a single instance of &lt;em&gt;one&lt;/em&gt; CPT, very much like when adding a link to a post. This got me thinking and lead me to investigate using WordPress’s existing &lt;em&gt;Insert/Edit Link&lt;/em&gt; modal that’s available via the visual editor.&lt;/p&gt;
+&lt;h3 id=&quot;a-little-less-work&quot;&gt;A little less work&lt;/h3&gt;
+&lt;p&gt;Making the Insert/Edit Link modal window available outside of the visual editor was simple: hook into the &lt;code&gt;admin_enqueue_scripts&lt;/code&gt; and enqueue the &lt;code&gt;wp-link&lt;/code&gt; script for the required page:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function my_funky_func() {
+    wp_enqueue_script(&amp;#39;wp-link&amp;#39;);
 }
-add_action(&#39;admin_enqueue_scripts&#39;, &#39;my_funky_func&#39;);
-</code></pre><p>In the JS for the edit page, <code>wpLink.open()</code> must triggered by a click event and handled:</p>
-<pre><code>    $(&#39;body&#39;).on(&#39;click&#39;, &#39;#my-modal-trigger&#39;, function(e) {
+add_action(&amp;#39;admin_enqueue_scripts&amp;#39;, &amp;#39;my_funky_func&amp;#39;);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In the JS for the edit page, &lt;code&gt;wpLink.open()&lt;/code&gt; must triggered by a click event and handled:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    $(&amp;#39;body&amp;#39;).on(&amp;#39;click&amp;#39;, &amp;#39;#my-modal-trigger&amp;#39;, function(e) {
 
-        // This can be any value. Its sole purpose is to let us know if the modal that&#39;s open
+        // This can be any value. Its sole purpose is to let us know if the modal that&amp;#39;s open
         // is the default or a custom one.
         window.mySpecialModalVariable = e.target.dataset.target;
 
         // This must have a value because the link dialogue expects it to 
-        // (a wp_editor instance, actually, but that part doesn&#39;t matter here...as long as it has a value).
+        // (a wp_editor instance, actually, but that part doesn&amp;#39;t matter here...as long as it has a value).
         wpActiveEditor = true;
 
         // Open the link popup.
@@ -58,12 +58,12 @@ add_action(&#39;admin_enqueue_scripts&#39;, &#39;my_funky_func&#39;);
         // So no other action is triggered.
         return false;
     });
-</code></pre><p>The submission and cancellation of the Insert/Edit Link dialogue box also needs to be handled. So off we go…</p>
-<pre><code>    function closeMyModal() {
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The submission and cancellation of the Insert/Edit Link dialogue box also needs to be handled. So off we go…&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    function closeMyModal() {
 
         // Again, an editor instance is expected, as upon closing .focus() is called on
         // wpLink.textarea, so we need to provide a jQuery object to .focus() on.
-        wpLink.textarea = $(&#39;body&#39;);
+        wpLink.textarea = $(&amp;#39;body&amp;#39;);
         wpLink.close();
 
         window.mySpecialModalVariable = false;
@@ -71,8 +71,8 @@ add_action(&#39;admin_enqueue_scripts&#39;, &#39;my_funky_func&#39;);
         e.stopPropagation();
     };
 
-    // When the dialogue box&#39;s submit button is clicked...
-    $(&#39;body&#39;).on(&#39;click&#39;, &#39;#wp-link-submit&#39;, function(e) {
+    // When the dialogue box&amp;#39;s submit button is clicked...
+    $(&amp;#39;body&amp;#39;).on(&amp;#39;click&amp;#39;, &amp;#39;#wp-link-submit&amp;#39;, function(e) {
 
         var selectedItem = wpLink.getAttrs();
 
@@ -86,32 +86,32 @@ add_action(&#39;admin_enqueue_scripts&#39;, &#39;my_funky_func&#39;);
     });
 
     // When the user clicks the cancel button, close button, or overlay...
-    $(&#39;body&#39;).on(&#39;click&#39;, &#39;#wp-link-cancel, #wp-link-close, #wp-link-backdrop&#39;, function(e) {
+    $(&amp;#39;body&amp;#39;).on(&amp;#39;click&amp;#39;, &amp;#39;#wp-link-cancel, #wp-link-close, #wp-link-backdrop&amp;#39;, function(e) {
 
-        // Do whatever&#39;s necessary, then...
+        // Do whatever&amp;#39;s necessary, then...
 
         closeMyModal();
     });
-</code></pre><h3 id="good-but-not-good-enough-">Good, but not good enough…</h3>
-<p>The above works. Great. The problem with it is that it allows you to select <em>any</em> post type. You might want this. I didn’t. So I needed to modify the AJAX call and/or the query that returns the results.</p>
-<p>It turns out that it’s relatively simple (but not totally obvious how) to manipulate the Insert/Edit modal’s content: <em>intercept the AJAX request</em>.</p>
-<pre><code>$(document).ready(function() {
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;good-but-not-good-enough-&quot;&gt;Good, but not good enough…&lt;/h3&gt;
+&lt;p&gt;The above works. Great. The problem with it is that it allows you to select &lt;em&gt;any&lt;/em&gt; post type. You might want this. I didn’t. So I needed to modify the AJAX call and/or the query that returns the results.&lt;/p&gt;
+&lt;p&gt;It turns out that it’s relatively simple (but not totally obvious how) to manipulate the Insert/Edit modal’s content: &lt;em&gt;intercept the AJAX request&lt;/em&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$(document).ready(function() {
 
     $.ajaxSetup({
         beforeSend: function(jqXHR, data) {
 
-            // I don&#39;t want to do anything if there&#39;s no data to send.
+            // I don&amp;#39;t want to do anything if there&amp;#39;s no data to send.
             if (!data.data) return true;
 
-            // I only want to modify the request if it&#39;s for my custom modal. 
+            // I only want to modify the request if it&amp;#39;s for my custom modal. 
             if (!window.mySpecialModalVariable) return true;
 
             // Made it. Now, I need to know where the AJAX is going.
             // Break down the query params into key/value pairs and find out.
-            $.each(data.data.split(&#39;&amp;&#39;), function(i, kv) {
-                var kv = kv.split(&#39;=&#39;);
-                if (kv[0] == &#39;action&#39; &amp;&amp; kv[1] == &#39;wp-link-ajax&#39;) {
-                    data.data += &#39;&amp;my-special-param=1&#39;;
+            $.each(data.data.split(&amp;#39;&amp;amp;&amp;#39;), function(i, kv) {
+                var kv = kv.split(&amp;#39;=&amp;#39;);
+                if (kv[0] == &amp;#39;action&amp;#39; &amp;amp;&amp;amp; kv[1] == &amp;#39;wp-link-ajax&amp;#39;) {
+                    data.data += &amp;#39;&amp;amp;my-special-param=1&amp;#39;;
                 }
             });
 
@@ -119,22 +119,22 @@ add_action(&#39;admin_enqueue_scripts&#39;, &#39;my_funky_func&#39;);
         }
     });
 });
-</code></pre><p>Looking good so far. You may have noticed the <code>window.mySpecialModalVariable</code> in the code above. This exists for the purpose of letting us know if the AJAX request is coming from a custom modal or the default one. It’s given a value when the custom modal is opened, and it’s set to false when the dialogue box is closed via a call to <code>closeMyModal()</code>.</p>
-<p>Having this variable isn’t imperative, but if you (might ever) have a visual editor on the same page in which this code will run, you’d find that <em>all</em> AJAX requests to <code>wp-link-ajax</code> would be modified, and the selection of posts in regular Insert/Edit Link modals would be limited to the same ones in your custom modal.</p>
-<h3 id="and-finally-">And finally…</h3>
-<p>All that remains is to filter <code>wp_link_query_args</code> and check for <code>my-special-param</code>‘s presence.</p>
-<pre><code>function awesome_wp_link_filter($args) {
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Looking good so far. You may have noticed the &lt;code&gt;window.mySpecialModalVariable&lt;/code&gt; in the code above. This exists for the purpose of letting us know if the AJAX request is coming from a custom modal or the default one. It’s given a value when the custom modal is opened, and it’s set to false when the dialogue box is closed via a call to &lt;code&gt;closeMyModal()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Having this variable isn’t imperative, but if you (might ever) have a visual editor on the same page in which this code will run, you’d find that &lt;em&gt;all&lt;/em&gt; AJAX requests to &lt;code&gt;wp-link-ajax&lt;/code&gt; would be modified, and the selection of posts in regular Insert/Edit Link modals would be limited to the same ones in your custom modal.&lt;/p&gt;
+&lt;h3 id=&quot;and-finally-&quot;&gt;And finally…&lt;/h3&gt;
+&lt;p&gt;All that remains is to filter &lt;code&gt;wp_link_query_args&lt;/code&gt; and check for &lt;code&gt;my-special-param&lt;/code&gt;‘s presence.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function awesome_wp_link_filter($args) {
     global $post;
 
-    if (array_key_exists(&#39;my-special-param&#39;, $_POST)) {
-        $args[&#39;post_type&#39;] = array(&#39;my-special-post-type&#39;);
+    if (array_key_exists(&amp;#39;my-special-param&amp;#39;, $_POST)) {
+        $args[&amp;#39;post_type&amp;#39;] = array(&amp;#39;my-special-post-type&amp;#39;);
     }
 
     return $args;
 }
 
-add_filter(&#39;wp_link_query_args&#39;, &#39;awesome_wp_link_filter&#39;, 99);
-</code></pre><p>And that’s it. When the custom modal is launched, it will only display a list of <code>my-special-post-type</code>s. It might not seem like a big deal, but when you’ve got 100,000+ rows in <code>wp_posts</code>, 20+ different post types, and there are only 50 posts of the CPT you’re after, it’s nice to be able to select from a subset rather than the whole set.</p>
+add_filter(&amp;#39;wp_link_query_args&amp;#39;, &amp;#39;awesome_wp_link_filter&amp;#39;, 99);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And that’s it. When the custom modal is launched, it will only display a list of &lt;code&gt;my-special-post-type&lt;/code&gt;s. It might not seem like a big deal, but when you’ve got 100,000+ rows in &lt;code&gt;wp_posts&lt;/code&gt;, 20+ different post types, and there are only 50 posts of the CPT you’re after, it’s nice to be able to select from a subset rather than the whole set.&lt;/p&gt;
 
       </section>
     </article>

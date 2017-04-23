@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Up - </title>
+  <title>Up - Prickly Dev</title>
   <link rel="stylesheet" href="/gin-data/themes/gin-whitepaper/css/main.css">
 </head>
 <body>
@@ -23,37 +23,37 @@
     
     <article>
       <section class="content-body">
-      <p>I tend to eliminate repetitive tasks at the earliest possible opportunity. It&#39;s partly because I&#39;m lazy, but mostly because I don&#39;t like wasting time or energy. In other words, I appreciate efficiency.</p>
-<p>When on the command line I&#39;m frequent moving between directories, often going several levels deep before having to resurface to move into another. Far too often this means I end up having to type:</p>
-<pre><code>cd ../../../../
-</code></pre><p>The solution was to write a small bash function in my _~/.bash_profile_. This is it:</p>
-<pre><code>function up {
+      &lt;p&gt;I tend to eliminate repetitive tasks at the earliest possible opportunity. It&amp;#39;s partly because I&amp;#39;m lazy, but mostly because I don&amp;#39;t like wasting time or energy. In other words, I appreciate efficiency.&lt;/p&gt;
+&lt;p&gt;When on the command line I&amp;#39;m frequent moving between directories, often going several levels deep before having to resurface to move into another. Far too often this means I end up having to type:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd ../../../../
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The solution was to write a small bash function in my _~/.bash_profile_. This is it:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function up {
 
   cwd=$(pwd);
-  cds=&quot;&quot;;
+  cds=&amp;quot;&amp;quot;;
   i=0;
 
-  if [ $1 ] &amp;&amp; [ $1 -gt 0 ]
+  if [ $1 ] &amp;amp;&amp;amp; [ $1 -gt 0 ]
   then
 
     i=$1
 
     # Add the levels to the string
-    while [ &quot;$i&quot; -ne &quot;0&quot; ]; do
-      cds=&quot;$cds../&quot;;
+    while [ &amp;quot;$i&amp;quot; -ne &amp;quot;0&amp;quot; ]; do
+      cds=&amp;quot;$cds../&amp;quot;;
       i=$(expr $i - 1);
     done
 
     # Excute the command
-    cd &quot;$cds&quot;
+    cd &amp;quot;$cds&amp;quot;
   else                                                                          
     cd ../
   fi
 
 }
-</code></pre><p>Now, instead of a <code>cd</code> plus multiple <code>../</code>, I can just type:</p>
-<pre><code>up 4
-</code></pre><p>It was easier to write the function than find a script that already did the same thing. Feel free to use it.</p>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now, instead of a &lt;code&gt;cd&lt;/code&gt; plus multiple &lt;code&gt;../&lt;/code&gt;, I can just type:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;up 4
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;It was easier to write the function than find a script that already did the same thing. Feel free to use it.&lt;/p&gt;
 
       </section>
     </article>

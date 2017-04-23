@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Wordpress Heartbeat - </title>
+  <title>Wordpress Heartbeat - Prickly Dev</title>
   <link rel="stylesheet" href="/gin-data/themes/gin-whitepaper/css/main.css">
 </head>
 <body>
@@ -23,49 +23,49 @@
     
     <article>
       <section class="content-body">
-      <p>A quick one, but worth covering. If you’ve found this post, you probably already know why the WordPress Heartbeat matters; likely you’ve noticed excessive calls to <code>wp-admin/admin-ajax.php</code>, so I won’t patronise you or waste your time by explaining the basics. If, on the other hand, you <em>don’t</em> know what the WordPress Hearbeat API is, or why it matters, please <a href="https://en-gb.wordpress.org/plugins/heartbeat-control/">read this</a>, but <strong>don’t</strong> install the suggested plugin, at least not before reading and considering what’s below.</p>
-<h3 id="hearbeat-control">Hearbeat Control</h3>
-<p>Most posts out there (like the one linked to above) will tell you that, if you want to alter the frequency of the WordPress heartbeat, you should install the <em>Heartbeat Control</em> plugin. This is fine, if you’re a non-technical user. However, if you have some technical knowledge and are comfortable modifying the <code>functions.php</code> file, it makes little sense to add yet another plugin to the stack when you can achieve the desired result by adding 5 lines of code to your <code>functions.php</code>:</p>
-<pre><code>function limit_heartbeat($settings) {
-    $settings[&#39;interval&#39;] = 60; // Frequency of heartbeat in seconds (min: 15, max 120).
+      &lt;p&gt;A quick one, but worth covering. If you’ve found this post, you probably already know why the WordPress Heartbeat matters; likely you’ve noticed excessive calls to &lt;code&gt;wp-admin/admin-ajax.php&lt;/code&gt;, so I won’t patronise you or waste your time by explaining the basics. If, on the other hand, you &lt;em&gt;don’t&lt;/em&gt; know what the WordPress Hearbeat API is, or why it matters, please &lt;a href=&quot;https://en-gb.wordpress.org/plugins/heartbeat-control/&quot;&gt;read this&lt;/a&gt;, but &lt;strong&gt;don’t&lt;/strong&gt; install the suggested plugin, at least not before reading and considering what’s below.&lt;/p&gt;
+&lt;h3 id=&quot;hearbeat-control&quot;&gt;Hearbeat Control&lt;/h3&gt;
+&lt;p&gt;Most posts out there (like the one linked to above) will tell you that, if you want to alter the frequency of the WordPress heartbeat, you should install the &lt;em&gt;Heartbeat Control&lt;/em&gt; plugin. This is fine, if you’re a non-technical user. However, if you have some technical knowledge and are comfortable modifying the &lt;code&gt;functions.php&lt;/code&gt; file, it makes little sense to add yet another plugin to the stack when you can achieve the desired result by adding 5 lines of code to your &lt;code&gt;functions.php&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function limit_heartbeat($settings) {
+    $settings[&amp;#39;interval&amp;#39;] = 60; // Frequency of heartbeat in seconds (min: 15, max 120).
     return $settings;
 }
-add_filter(&#39;heartbeat_settings&#39;, &#39;limit_heartbeat&#39;);
-</code></pre><h3 id="limit-heartbeat-on-specific-pages">Limit Heartbeat on specific pages</h3>
-<p>Altering the <a href="https://github.com/WordPress/WordPress/blob/master/wp-includes/js/heartbeat.js"><code>minimalInterval</code></a> setting as above alters the frequency of autosave when creating and editing posts. If you’d like a different frequency in these instances, you know what to do (add a condition):</p>
-<pre><code>function limit_heartbeat($settings) {
+add_filter(&amp;#39;heartbeat_settings&amp;#39;, &amp;#39;limit_heartbeat&amp;#39;);
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;limit-heartbeat-on-specific-pages&quot;&gt;Limit Heartbeat on specific pages&lt;/h3&gt;
+&lt;p&gt;Altering the &lt;a href=&quot;https://github.com/WordPress/WordPress/blob/master/wp-includes/js/heartbeat.js&quot;&gt;&lt;code&gt;minimalInterval&lt;/code&gt;&lt;/a&gt; setting as above alters the frequency of autosave when creating and editing posts. If you’d like a different frequency in these instances, you know what to do (add a condition):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function limit_heartbeat($settings) {
     global $pagenow;
 
-    // Check which page we&#39;re on, alter the interval if necessary.
-    if (in_array($pagenow, array(&#39;new-post.php&#39;,&#39;edit.php&#39;)) {
-        $settings[&#39;interval&#39;] = 60; // Frequency of heartbeat in seconds (min: 15, max 120).
+    // Check which page we&amp;#39;re on, alter the interval if necessary.
+    if (in_array($pagenow, array(&amp;#39;new-post.php&amp;#39;,&amp;#39;edit.php&amp;#39;)) {
+        $settings[&amp;#39;interval&amp;#39;] = 60; // Frequency of heartbeat in seconds (min: 15, max 120).
     }
 
     return $settings;
 }
-add_filter(&#39;heartbeat_settings&#39;, &#39;limit_heartbeat&#39;);
-</code></pre><h3 id="completely-disable-the-heartbeat">Completely disable the heartbeat</h3>
-<p>I wouldn’t recommend doing this, since it will affect WP’s handling of admin sessions, autosave and who knows what else. If you’re desperate to do so though, you just have to deregister the appropriate script:</p>
-<pre><code>function disable_heartbeat() {
-    wp_deregister_script(&#39;heartbeat&#39;, &#39;remove_heartbeat&#39;, 1);
+add_filter(&amp;#39;heartbeat_settings&amp;#39;, &amp;#39;limit_heartbeat&amp;#39;);
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;completely-disable-the-heartbeat&quot;&gt;Completely disable the heartbeat&lt;/h3&gt;
+&lt;p&gt;I wouldn’t recommend doing this, since it will affect WP’s handling of admin sessions, autosave and who knows what else. If you’re desperate to do so though, you just have to deregister the appropriate script:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function disable_heartbeat() {
+    wp_deregister_script(&amp;#39;heartbeat&amp;#39;, &amp;#39;remove_heartbeat&amp;#39;, 1);
 }
-add_filter(&#39;init&#39;, &#39;disable_heartbeat&#39;);
-</code></pre><h3 id="bonus-limit-all-wp-ajax-requests">Bonus: limit all WP AJAX requests</h3>
-<p>If you want to reduce the frequency of <em>all</em> WP AJAX requests, just substitute <code>minimalInterval</code> for <code>interval</code>:</p>
-<pre><code>function limit_heartbeat($settings) {
-    $settings[&#39;minimalInterval&#39;] = 60; // Frequency of heartbeat in seconds. (min: 1, max 60)
+add_filter(&amp;#39;init&amp;#39;, &amp;#39;disable_heartbeat&amp;#39;);
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;bonus-limit-all-wp-ajax-requests&quot;&gt;Bonus: limit all WP AJAX requests&lt;/h3&gt;
+&lt;p&gt;If you want to reduce the frequency of &lt;em&gt;all&lt;/em&gt; WP AJAX requests, just substitute &lt;code&gt;minimalInterval&lt;/code&gt; for &lt;code&gt;interval&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function limit_heartbeat($settings) {
+    $settings[&amp;#39;minimalInterval&amp;#39;] = 60; // Frequency of heartbeat in seconds. (min: 1, max 60)
     return $settings;
 }
-add_filter(&#39;heartbeat_settings&#39;, &#39;limit_heartbeat&#39;);
-</code></pre><p>The comments in the <code>/wp-includes/js/heartbeat.js</code> have this to say about the <code>minimalInterval</code> setting:</p>
-<blockquote>
-<p>Used to limit the number of AJAX requests. Overrides all other intervals if they are shorter.</p>
-</blockquote>
-<p>I’ve tested it and it does exactly what it says on the tin. If you find that <code>interval</code> doesn’t adequately reduce the calls to <code>wp-admin/admin-ajax.php</code>, try using <code>minimalInterval</code> instead. I recommended exploring <a href="https://github.com/WordPress/WordPress/blob/master/wp-includes/js/heartbeat.js">the file</a> for yourself if you’d like a deeper understanding of how exactly these settings are applied and used.</p>
-<h3 id="why-not-just-use-the-plugin-">Why not just use the plugin?</h3>
-<p>When the change you need to make to your WordPress site is beyond your understanding, or the time and energy required to implement the change is beyond what you are willing to sacrifice, use a plugin. If none of the above is true, and the change you want to make is already provided by an existing plugin, but you don’t think you would create a significantly improved solution, use a plugin. Why reinvent the wheel, right?</p>
-<p>However, if all that’s required to add a specific piece of functionality is essentially a copy and paste of a tiny sample of code into your <code>functions.php</code> (as is the case here), it seems like overkill to reach for a plugin. The WordPress Heartbeat frequency alteration is the type of thing you’ll probably set once and never need to touch again. Why bother with a plugin?</p>
-<p>Each plugin you add to your WordPress site adds to the overhead. In some cases, that additional overhead is negligible, but often it’s not, and the cumulative effect can on occasion be crippling. Being selective — frugal, even — with the WordPress plugins you choose to use can save you a great deal of <a href="https://www.woothemes.com/2013/09/wordpress-plugins-ignorance/">trouble</a> further down the line.</p>
+add_filter(&amp;#39;heartbeat_settings&amp;#39;, &amp;#39;limit_heartbeat&amp;#39;);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The comments in the &lt;code&gt;/wp-includes/js/heartbeat.js&lt;/code&gt; have this to say about the &lt;code&gt;minimalInterval&lt;/code&gt; setting:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Used to limit the number of AJAX requests. Overrides all other intervals if they are shorter.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I’ve tested it and it does exactly what it says on the tin. If you find that &lt;code&gt;interval&lt;/code&gt; doesn’t adequately reduce the calls to &lt;code&gt;wp-admin/admin-ajax.php&lt;/code&gt;, try using &lt;code&gt;minimalInterval&lt;/code&gt; instead. I recommended exploring &lt;a href=&quot;https://github.com/WordPress/WordPress/blob/master/wp-includes/js/heartbeat.js&quot;&gt;the file&lt;/a&gt; for yourself if you’d like a deeper understanding of how exactly these settings are applied and used.&lt;/p&gt;
+&lt;h3 id=&quot;why-not-just-use-the-plugin-&quot;&gt;Why not just use the plugin?&lt;/h3&gt;
+&lt;p&gt;When the change you need to make to your WordPress site is beyond your understanding, or the time and energy required to implement the change is beyond what you are willing to sacrifice, use a plugin. If none of the above is true, and the change you want to make is already provided by an existing plugin, but you don’t think you would create a significantly improved solution, use a plugin. Why reinvent the wheel, right?&lt;/p&gt;
+&lt;p&gt;However, if all that’s required to add a specific piece of functionality is essentially a copy and paste of a tiny sample of code into your &lt;code&gt;functions.php&lt;/code&gt; (as is the case here), it seems like overkill to reach for a plugin. The WordPress Heartbeat frequency alteration is the type of thing you’ll probably set once and never need to touch again. Why bother with a plugin?&lt;/p&gt;
+&lt;p&gt;Each plugin you add to your WordPress site adds to the overhead. In some cases, that additional overhead is negligible, but often it’s not, and the cumulative effect can on occasion be crippling. Being selective — frugal, even — with the WordPress plugins you choose to use can save you a great deal of &lt;a href=&quot;https://www.woothemes.com/2013/09/wordpress-plugins-ignorance/&quot;&gt;trouble&lt;/a&gt; further down the line.&lt;/p&gt;
 
       </section>
     </article>

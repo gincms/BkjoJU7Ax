@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Custom Rewrite Rules Per Post - </title>
+  <title>Custom Rewrite Rules Per Post - Prickly Dev</title>
   <link rel="stylesheet" href="/gin-data/themes/gin-whitepaper/css/main.css">
 </head>
 <body>
@@ -23,138 +23,138 @@
     
     <article>
       <section class="content-body">
-      <p>I often feel like I’m coercing WordPress into doing my bidding. It makes me feel dirty. Never more has this been the case than when I was asked to find a way to allow post authors to customise the rewrite base for a custom post type (CPT). What does that mean exactly? It means that if a CPT was registered with:</p>
-<pre><code>register_post_type(&#39;my-special-post-type&#39;, array(
+      &lt;p&gt;I often feel like I’m coercing WordPress into doing my bidding. It makes me feel dirty. Never more has this been the case than when I was asked to find a way to allow post authors to customise the rewrite base for a custom post type (CPT). What does that mean exactly? It means that if a CPT was registered with:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;register_post_type(&amp;#39;my-special-post-type&amp;#39;, array(
     // ...params...
-    &#39;rewrite&#39; =&gt; array(
-        &#39;slug&#39; =&gt; &#39;horses&#39;,
-        &#39;with_front&#39; =&gt; false
+    &amp;#39;rewrite&amp;#39; =&amp;gt; array(
+        &amp;#39;slug&amp;#39; =&amp;gt; &amp;#39;horses&amp;#39;,
+        &amp;#39;with_front&amp;#39; =&amp;gt; false
      ),
     // ...more params...
 ));
-</code></pre><p>…instead of the <em>my_special_post_type</em> post having a permalink of <code>http://www.mysite.com/horses/%postname%/</code>, the user could override the default CPT base slug of <code>/horses/</code> and force the post to use <code>http://www.mysite.com/unicorns/%postname%/</code> instead.</p>
-<h3 id="hooks-hacks">Hooks &amp; Hacks</h3>
-<p>If you don’t understand <a href="https://codex.wordpress.org/Function_Reference/register_post_type">custom post types</a>, you have no business attempting what follows. This isn’t <del>going</del> meant to be an in-depth, step-by-step walk through. I’m mainly writing this as a means to purge the experience from my system. Honestly, it feels very hacky, which shouldn’t really be the case, considering I’m doing it all “the WordPress way”. Everything was implemented using hooks and filters. Does that mean the WordPress way is hacky? Or am I just doing it wrong? You be the judge. Right now, I don’t give a shit. It works. Flawlessly. So far…</p>
-<h3 id="the-process">The Process</h3>
-<p>As usual, I googled around a fair bit to see if there were any publicly demonstrated implementations I could borrow. Why reinvent the wheel, right? Unfortunately, I didn’t find any. Plan B? Work out the steps I think will be required to make it happen, then do it. The basic steps I came up with were as follows:</p>
-<ul>
-<li>Add/save a field on the edit page that allows specification of the new slug.</li>
-<li>Add rewrite rules based on this above custom slug.</li>
-<li>With rewrite rule active, prevent access to the post via post type’s <em>actual</em> base slug.</li>
-<li>Generate permalinks based on the custom slug, not the post type’s <em>actual</em> base slug.</li>
-</ul>
-<p>I could have started with adding the field and saving the value, but I figured that part would be easy. Instead, I started with what I thought would be the most difficult part: setting up the rewrite rules.</p>
-<h3 id="dynamic-rewrite-rules">Dynamic Rewrite Rules</h3>
-<p>Since I wouldn’t know before hand what rules would be required, I needed to work that out on the fly and add them, before WP started processing the stored rules. I hooked into <code>init</code> and created a function that retrieves posts of type <code>my_special_post_type</code> that have been assigned a custom base slug. Then I iterated through each of the found posts and added a rewrite rule for each.</p>
-<pre><code>add_action(&#39;init&#39;, &#39;my_init_function&#39;);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;…instead of the &lt;em&gt;my_special_post_type&lt;/em&gt; post having a permalink of &lt;code&gt;http://www.mysite.com/horses/%postname%/&lt;/code&gt;, the user could override the default CPT base slug of &lt;code&gt;/horses/&lt;/code&gt; and force the post to use &lt;code&gt;http://www.mysite.com/unicorns/%postname%/&lt;/code&gt; instead.&lt;/p&gt;
+&lt;h3 id=&quot;hooks-hacks&quot;&gt;Hooks &amp;amp; Hacks&lt;/h3&gt;
+&lt;p&gt;If you don’t understand &lt;a href=&quot;https://codex.wordpress.org/Function_Reference/register_post_type&quot;&gt;custom post types&lt;/a&gt;, you have no business attempting what follows. This isn’t &lt;del&gt;going&lt;/del&gt; meant to be an in-depth, step-by-step walk through. I’m mainly writing this as a means to purge the experience from my system. Honestly, it feels very hacky, which shouldn’t really be the case, considering I’m doing it all “the WordPress way”. Everything was implemented using hooks and filters. Does that mean the WordPress way is hacky? Or am I just doing it wrong? You be the judge. Right now, I don’t give a shit. It works. Flawlessly. So far…&lt;/p&gt;
+&lt;h3 id=&quot;the-process&quot;&gt;The Process&lt;/h3&gt;
+&lt;p&gt;As usual, I googled around a fair bit to see if there were any publicly demonstrated implementations I could borrow. Why reinvent the wheel, right? Unfortunately, I didn’t find any. Plan B? Work out the steps I think will be required to make it happen, then do it. The basic steps I came up with were as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Add/save a field on the edit page that allows specification of the new slug.&lt;/li&gt;
+&lt;li&gt;Add rewrite rules based on this above custom slug.&lt;/li&gt;
+&lt;li&gt;With rewrite rule active, prevent access to the post via post type’s &lt;em&gt;actual&lt;/em&gt; base slug.&lt;/li&gt;
+&lt;li&gt;Generate permalinks based on the custom slug, not the post type’s &lt;em&gt;actual&lt;/em&gt; base slug.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I could have started with adding the field and saving the value, but I figured that part would be easy. Instead, I started with what I thought would be the most difficult part: setting up the rewrite rules.&lt;/p&gt;
+&lt;h3 id=&quot;dynamic-rewrite-rules&quot;&gt;Dynamic Rewrite Rules&lt;/h3&gt;
+&lt;p&gt;Since I wouldn’t know before hand what rules would be required, I needed to work that out on the fly and add them, before WP started processing the stored rules. I hooked into &lt;code&gt;init&lt;/code&gt; and created a function that retrieves posts of type &lt;code&gt;my_special_post_type&lt;/code&gt; that have been assigned a custom base slug. Then I iterated through each of the found posts and added a rewrite rule for each.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;add_action(&amp;#39;init&amp;#39;, &amp;#39;my_init_function&amp;#39;);
 
 function my_init_function() {
 
     add_my_special_rules();
 
-    add_filter(&#39;post_type_link&#39;, &#39;my_special_filter_permalink&#39;), 10, 3);
-    add_action(&#39;template_redirect&#39;, &#39;my_special_override&#39;), 1);
+    add_filter(&amp;#39;post_type_link&amp;#39;, &amp;#39;my_special_filter_permalink&amp;#39;), 10, 3);
+    add_action(&amp;#39;template_redirect&amp;#39;, &amp;#39;my_special_override&amp;#39;), 1);
 }
 
 function add_my_special_rules() {
     global $wpdb;
 
-    $sql = &quot;SELECT *
+    $sql = &amp;quot;SELECT *
             FROM `wp_posts`
             JOIN `wp_postmeta` ON `post_id` = `ID`
-            WHERE `post_type` = &#39;my_special_post_type&#39;
-            AND `post_status` = &#39;publish&#39;
-            AND `meta_key` = &#39;my_special_post_options&#39;
-            AND `meta_value` LIKE &#39;%my_slug_override%&#39;&quot;;
+            WHERE `post_type` = &amp;#39;my_special_post_type&amp;#39;
+            AND `post_status` = &amp;#39;publish&amp;#39;
+            AND `meta_key` = &amp;#39;my_special_post_options&amp;#39;
+            AND `meta_value` LIKE &amp;#39;%my_slug_override%&amp;#39;&amp;quot;;
 
-    $results = $wpdb-&gt;get_results($sql);
+    $results = $wpdb-&amp;gt;get_results($sql);
 
     if ($results) {
 
         foreach ($results as $post) {
-            $options = unserialize($post-&gt;meta_value);
+            $options = unserialize($post-&amp;gt;meta_value);
 
-            if (array_key_exists(&#39;my_slug_override&#39;, $options) &amp;&amp; empty($options[&#39;my_slug_override&#39;])) continue;
+            if (array_key_exists(&amp;#39;my_slug_override&amp;#39;, $options) &amp;amp;&amp;amp; empty($options[&amp;#39;my_slug_override&amp;#39;])) continue;
 
-            add_rewrite_rule(&quot;^{$options[&#39;my_slug_override&#39;]}/({$post-&gt;post_name})/?$&quot;, &quot;index.php?my_special_post_type=\$matches[1]&amp;post_type=my_special_post_type=\$matches[1]&quot;, &#39;top&#39;);
+            add_rewrite_rule(&amp;quot;^{$options[&amp;#39;my_slug_override&amp;#39;]}/({$post-&amp;gt;post_name})/?$&amp;quot;, &amp;quot;index.php?my_special_post_type=\$matches[1]&amp;amp;post_type=my_special_post_type=\$matches[1]&amp;quot;, &amp;#39;top&amp;#39;);
         }
     }
 }
-</code></pre><p>This isn’t the precise code I used, so don’t just lift it and expect it to work. My actual implementation was part of a class in a plugin, where as the above could be in the functions.php. It’s essentially the same, though. Also, it was for a hierarchical CPT, but the above is for a non-hierarchical CPT for the sake of simplicity.</p>
-<p>For a hierarchical CPT, you might only want the override option on the top level post, and have all child pages’s slugs derived from that. You may also want to match on anything <em>starting with</em> the post name (e.g. <code>&quot;^{$options[&#39;my_slug_override&#39;]}/({$post-&gt;post_name}.*)/?$&quot;</code>, which is what’s in my original implementation) rather than what is above. It depends on the nature of the post type, I guess.</p>
-<p>And if you’re wondering why I added a rewrite rule for each post, rather than one for each distinct base, it’s so that posts that weren’t meant to be found via that base, aren’t. This way, a page that’s only meant to be found via <code>/horses/mister-ed/</code> won’t also be found via <code>/unicorns/mister-ed/</code>.</p>
-<h3 id="override-permalinks">Override Permalinks</h3>
-<p>Like a good little WP soldier, I use <code>get_permalink()</code> and <code>the_permalink()</code> (but not repeatedly within the same template!) to construct URLs whenever I can. The problem with these functions is that they determine part of the permalink structure from the <code>rewrite</code> params supplied when the post type was registered. Shit.</p>
-<p>To get around this was fairly trivial, though. I used the <code>post_type_link</code> filter hook, added as a filter in the <code>init</code> function above. This is <em>not</em> to be confused with the <code>post_link</code> filter hook which <em>only</em> applies to posts of type <code>post</code>. It took me a few minutes of checking and double checking before I realised what was wrong.</p>
-<pre><code>function my_special_filter_permalink($url, $post, $leavename) {
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This isn’t the precise code I used, so don’t just lift it and expect it to work. My actual implementation was part of a class in a plugin, where as the above could be in the functions.php. It’s essentially the same, though. Also, it was for a hierarchical CPT, but the above is for a non-hierarchical CPT for the sake of simplicity.&lt;/p&gt;
+&lt;p&gt;For a hierarchical CPT, you might only want the override option on the top level post, and have all child pages’s slugs derived from that. You may also want to match on anything &lt;em&gt;starting with&lt;/em&gt; the post name (e.g. &lt;code&gt;&amp;quot;^{$options[&amp;#39;my_slug_override&amp;#39;]}/({$post-&amp;gt;post_name}.*)/?$&amp;quot;&lt;/code&gt;, which is what’s in my original implementation) rather than what is above. It depends on the nature of the post type, I guess.&lt;/p&gt;
+&lt;p&gt;And if you’re wondering why I added a rewrite rule for each post, rather than one for each distinct base, it’s so that posts that weren’t meant to be found via that base, aren’t. This way, a page that’s only meant to be found via &lt;code&gt;/horses/mister-ed/&lt;/code&gt; won’t also be found via &lt;code&gt;/unicorns/mister-ed/&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;override-permalinks&quot;&gt;Override Permalinks&lt;/h3&gt;
+&lt;p&gt;Like a good little WP soldier, I use &lt;code&gt;get_permalink()&lt;/code&gt; and &lt;code&gt;the_permalink()&lt;/code&gt; (but not repeatedly within the same template!) to construct URLs whenever I can. The problem with these functions is that they determine part of the permalink structure from the &lt;code&gt;rewrite&lt;/code&gt; params supplied when the post type was registered. Shit.&lt;/p&gt;
+&lt;p&gt;To get around this was fairly trivial, though. I used the &lt;code&gt;post_type_link&lt;/code&gt; filter hook, added as a filter in the &lt;code&gt;init&lt;/code&gt; function above. This is &lt;em&gt;not&lt;/em&gt; to be confused with the &lt;code&gt;post_link&lt;/code&gt; filter hook which &lt;em&gt;only&lt;/em&gt; applies to posts of type &lt;code&gt;post&lt;/code&gt;. It took me a few minutes of checking and double checking before I realised what was wrong.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function my_special_filter_permalink($url, $post, $leavename) {
 
     // Only apply this filter to special features.
-    if ($post-&gt;post_type != &#39;my_special_post_type&#39;) return $url;
+    if ($post-&amp;gt;post_type != &amp;#39;my_special_post_type&amp;#39;) return $url;
 
-    $options = get_post_meta($post-&gt;ID, &#39;my_special_post_options&#39;, true);
+    $options = get_post_meta($post-&amp;gt;ID, &amp;#39;my_special_post_options&amp;#39;, true);
 
-    if (array_key_exists(&#39;my_slug_override&#39;, $options) &amp;&amp; !empty($options[&#39;my_slug_override&#39;])) {
-        $url = str_replace(&#39;/horses/&#39;, &quot;/{$options[&#39;my_slug_override&#39;]}/&quot;, $url);
+    if (array_key_exists(&amp;#39;my_slug_override&amp;#39;, $options) &amp;amp;&amp;amp; !empty($options[&amp;#39;my_slug_override&amp;#39;])) {
+        $url = str_replace(&amp;#39;/horses/&amp;#39;, &amp;quot;/{$options[&amp;#39;my_slug_override&amp;#39;]}/&amp;quot;, $url);
     }
 
     return $url;
 }
-</code></pre><h3 id="redirect-the-real-permalink">Redirect The “Real” Permalink</h3>
-<p>The rewrite rules added dynamically via the <code>init</code> action hook make the posts with a custom base accessible (i.e. you don’t get a 404), but they’re still accessible through their “real” URL too. For example, <code>http://www.mysite.com/unicorns/better-than-horses/</code> is still accessible via <code>http://www.mysite.com/horses/better-than-horses/</code> at this point. Definitely don’t want that. For this, I hooked into the <code>template_redirect</code> action hook.</p>
-<pre><code>function my_special_override() {
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;redirect-the-real-permalink&quot;&gt;Redirect The “Real” Permalink&lt;/h3&gt;
+&lt;p&gt;The rewrite rules added dynamically via the &lt;code&gt;init&lt;/code&gt; action hook make the posts with a custom base accessible (i.e. you don’t get a 404), but they’re still accessible through their “real” URL too. For example, &lt;code&gt;http://www.mysite.com/unicorns/better-than-horses/&lt;/code&gt; is still accessible via &lt;code&gt;http://www.mysite.com/horses/better-than-horses/&lt;/code&gt; at this point. Definitely don’t want that. For this, I hooked into the &lt;code&gt;template_redirect&lt;/code&gt; action hook.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function my_special_override() {
     global $post;
 
-    // Skip anything that&#39;s not my special post type...
-    if ($post-&gt;post_type != &#39;my_special_post_type&#39;) return;
+    // Skip anything that&amp;#39;s not my special post type...
+    if ($post-&amp;gt;post_type != &amp;#39;my_special_post_type&amp;#39;) return;
 
     // See if this thing has an override...
-    $options = get_post_meta($post-&gt;ID, &#39;my_special_post_options&#39;, true);
+    $options = get_post_meta($post-&amp;gt;ID, &amp;#39;my_special_post_options&amp;#39;, true);
 
-    if (!array_key_exists(&#39;my_slug_override&#39;, $feature_options) || empty($feature_options[&#39;my_slug_override&#39;])) return;
+    if (!array_key_exists(&amp;#39;my_slug_override&amp;#39;, $feature_options) || empty($feature_options[&amp;#39;my_slug_override&amp;#39;])) return;
 
     // It has an override, so should it be accessed via the current URL?
-    $current_path = $_SERVER[&#39;REQUEST_URI&#39;];
+    $current_path = $_SERVER[&amp;#39;REQUEST_URI&amp;#39;];
 
-    if (strpos($current_path, &quot;/{$feature_options[&#39;my_slug_override&#39;]}&quot;) !== false) return;
+    if (strpos($current_path, &amp;quot;/{$feature_options[&amp;#39;my_slug_override&amp;#39;]}&amp;quot;) !== false) return;
 
-    // It&#39;s using the wrong path, let&#39;s redirect to the right one.
-    $the_right_one = str_replace(&#39;/horses/&#39;, &quot;/{$feature_options[&#39;my_slug_override&#39;]}/&quot;, $current_path);
+    // It&amp;#39;s using the wrong path, let&amp;#39;s redirect to the right one.
+    $the_right_one = str_replace(&amp;#39;/horses/&amp;#39;, &amp;quot;/{$feature_options[&amp;#39;my_slug_override&amp;#39;]}/&amp;quot;, $current_path);
 
     // Fuck yea.
     wp_redirect(home_url($the_right_one), 301);
     exit();
 }
-</code></pre><p>I originally tried to add a rewrite rule using the earlier method that would redirect requests for the “real” URL to the custom one. It didn’t work out. I think it was for the best.</p>
-<h3 id="save-the-slug">Save The Slug</h3>
-<p>I won’t bother showing the code for adding an input field or metabox to WP’s edit post page, that’s a waste of keystrokes. Nor will I bother with the whole <code>save_posts</code> action hook — it’s what I used, naturally (it’s the WordPress way, after all), but it’s not interesting.</p>
-<p>What’s more interesting is that <code>flush_rewrite_rules()</code>— which needs to be called once the slug override option has been saved (in my case, I saved it as post meta) — exhibited unexpected behaviour. After the post was saved, the path to the new slug didn’t work, even though the post meta was saved and <code>flush_rewrite_rules()</code> was called during the save process. However, if I then saved a new value for the slug, the URL containing the <em>last</em> slug would start working, but the latest one would not.</p>
-<p>I dug into <code>/wp-includes/rewrite.php</code> which eventually led me to this block, around line 2043:</p>
-<pre><code>public function flush_rules($hard = true) {
-    delete_option(&#39;rewrite_rules&#39;);
-    $this-&gt;wp_rewrite_rules();
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I originally tried to add a rewrite rule using the earlier method that would redirect requests for the “real” URL to the custom one. It didn’t work out. I think it was for the best.&lt;/p&gt;
+&lt;h3 id=&quot;save-the-slug&quot;&gt;Save The Slug&lt;/h3&gt;
+&lt;p&gt;I won’t bother showing the code for adding an input field or metabox to WP’s edit post page, that’s a waste of keystrokes. Nor will I bother with the whole &lt;code&gt;save_posts&lt;/code&gt; action hook — it’s what I used, naturally (it’s the WordPress way, after all), but it’s not interesting.&lt;/p&gt;
+&lt;p&gt;What’s more interesting is that &lt;code&gt;flush_rewrite_rules()&lt;/code&gt;— which needs to be called once the slug override option has been saved (in my case, I saved it as post meta) — exhibited unexpected behaviour. After the post was saved, the path to the new slug didn’t work, even though the post meta was saved and &lt;code&gt;flush_rewrite_rules()&lt;/code&gt; was called during the save process. However, if I then saved a new value for the slug, the URL containing the &lt;em&gt;last&lt;/em&gt; slug would start working, but the latest one would not.&lt;/p&gt;
+&lt;p&gt;I dug into &lt;code&gt;/wp-includes/rewrite.php&lt;/code&gt; which eventually led me to this block, around line 2043:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;public function flush_rules($hard = true) {
+    delete_option(&amp;#39;rewrite_rules&amp;#39;);
+    $this-&amp;gt;wp_rewrite_rules();
     /**
-     * Filter whether a &quot;hard&quot; rewrite rule flush should be performed when requested.
+     * Filter whether a &amp;quot;hard&amp;quot; rewrite rule flush should be performed when requested.
      *
-     * A &quot;hard&quot; flush updates .htaccess (Apache) or web.config (IIS).
+     * A &amp;quot;hard&amp;quot; flush updates .htaccess (Apache) or web.config (IIS).
      *
      * @since 3.7.0
      *
-     * @param bool $hard Whether to flush rewrite rules &quot;hard&quot;. Default true.
+     * @param bool $hard Whether to flush rewrite rules &amp;quot;hard&amp;quot;. Default true.
      */
-    if ( ! $hard || ! apply_filters( &#39;flush_rewrite_rules_hard&#39;, true ) ) {
+    if ( ! $hard || ! apply_filters( &amp;#39;flush_rewrite_rules_hard&amp;#39;, true ) ) {
         return;
     }
-    if ( function_exists( &#39;save_mod_rewrite_rules&#39; ) )
+    if ( function_exists( &amp;#39;save_mod_rewrite_rules&amp;#39; ) )
         save_mod_rewrite_rules();
-    if ( function_exists( &#39;iis7_save_url_rewrite_rules&#39; ) )
+    if ( function_exists( &amp;#39;iis7_save_url_rewrite_rules&amp;#39; ) )
         iis7_save_url_rewrite_rules();
 }
-</code></pre><p>So, I replaced <code>flush_rewrite_rules()</code> with <code>delete_option(&#39;rewrite_rules&#39;)</code> and it suddenly started working as expected. <em>Hallelujah</em>. The custom URL base was immediately functional for the post on which it had been set, and for no others (as it should be). I went even deeper and settled on the more explicit:</p>
-<pre><code>$wpdb-&gt;delete($wpdb-&gt;options, array(&#39;option_name&#39; =&gt; &#39;rewrite_rules&#39;));
-</code></pre><h3 id="in-closing-">In closing…</h3>
-<p>Despite the fact that it works, I don’t recommend implementing something like this. If a post is meant to be under a different section, then it should have the appropriate category, tag or post type. This isn’t always possible though. In my case, I had no choice, for reasons I won’t go into. Suffice it to say that simply creating special categories or tags, or a new post type, just wasn’t feasible given our setup, which is incredibly bespoke.</p>
-<p>And this is my typical experience of WordPress. I think it allows you to do <em>too much</em>. In trying to be everything to everyone it has become as much a whore as the language it’s written in (looking at you, <em>PHP</em>). It’s up to developers to use it sensibly. This isn’t a massive problem for small sites. But when you’ve got thousands upon thousands of posts (across many post types) and millions of visitors, those “clever” workarounds, inefficient but functional solutions, and hacky fixes end up boxing you in, inevitably forcing you to refactor, rewrite, or create even more “clever” workarounds and hacks further down the line. I suspect I’ll also end up paying for this piece of work eventually.</p>
-<p>Technical debt is a bitch. And so is WordPress.</p>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;So, I replaced &lt;code&gt;flush_rewrite_rules()&lt;/code&gt; with &lt;code&gt;delete_option(&amp;#39;rewrite_rules&amp;#39;)&lt;/code&gt; and it suddenly started working as expected. &lt;em&gt;Hallelujah&lt;/em&gt;. The custom URL base was immediately functional for the post on which it had been set, and for no others (as it should be). I went even deeper and settled on the more explicit:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$wpdb-&amp;gt;delete($wpdb-&amp;gt;options, array(&amp;#39;option_name&amp;#39; =&amp;gt; &amp;#39;rewrite_rules&amp;#39;));
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;in-closing-&quot;&gt;In closing…&lt;/h3&gt;
+&lt;p&gt;Despite the fact that it works, I don’t recommend implementing something like this. If a post is meant to be under a different section, then it should have the appropriate category, tag or post type. This isn’t always possible though. In my case, I had no choice, for reasons I won’t go into. Suffice it to say that simply creating special categories or tags, or a new post type, just wasn’t feasible given our setup, which is incredibly bespoke.&lt;/p&gt;
+&lt;p&gt;And this is my typical experience of WordPress. I think it allows you to do &lt;em&gt;too much&lt;/em&gt;. In trying to be everything to everyone it has become as much a whore as the language it’s written in (looking at you, &lt;em&gt;PHP&lt;/em&gt;). It’s up to developers to use it sensibly. This isn’t a massive problem for small sites. But when you’ve got thousands upon thousands of posts (across many post types) and millions of visitors, those “clever” workarounds, inefficient but functional solutions, and hacky fixes end up boxing you in, inevitably forcing you to refactor, rewrite, or create even more “clever” workarounds and hacks further down the line. I suspect I’ll also end up paying for this piece of work eventually.&lt;/p&gt;
+&lt;p&gt;Technical debt is a bitch. And so is WordPress.&lt;/p&gt;
 
       </section>
     </article>
