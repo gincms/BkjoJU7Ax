@@ -89,11 +89,11 @@ foreach ( $crons as $timestamp =&gt; $cronhooks ) {
 <p>The solution was to take the code I’d sketched out while testing the filter for <code>get_option(&#39;cron&#39;)</code> and use it in my <code>schedule_event</code> filter callback to determine the likelihood that the cron is actually running. It looks something like this:</p>
 <pre><code>class My_Cron_Log_Class {
 
-    /* ...functions here... */
+    /* ...other functions here... */
 
     public function my_cron_schedule_filter_function($event) {
 
-        // I want to know what the entry point is so, before I look through, reverse the $debug_backtrace array
+        // I want to know what the entry point is, so, before I look through, reverse the $debug_backtrace array
         $backtrace = array_reverse(debug_backtrace(false), true);
 
         // Certain files/functions should be present in the trace if this cron run is legit: wp-cron.php (file), wp-crontrol.php (file), wp_reschedule_event (func) wp_schedule_single_event (func)... 
@@ -103,7 +103,7 @@ foreach ( $crons as $timestamp =&gt; $cronhooks ) {
         $call_to = false;
         $call_origin = false;
 
-        // Found out what triggered the call...
+        // Find out what triggered the call...
         foreach ($backtrace as $i =&gt; $trace) {
 
             if (preg_match(&#39;/(wp-cron(trol)?.php)$/&#39;, $trace[&#39;file&#39;], $preg_matches)) {
