@@ -28,7 +28,7 @@
       <p>I tend to eliminate repetitive tasks at the earliest possible opportunity. It&#39;s partly because I&#39;m lazy, but mostly because I don&#39;t like wasting time or energy. In other words, I appreciate efficiency.</p>
 <p>When on the command line I&#39;m frequently moving between directories, often going several levels deep before having to resurface to move into another. Far too often this means I end up having to type:</p>
 <pre><code>cd ../../../../
-</code></pre><p>The solution was to write a small bash function in my _~/.bash_profile_. This is it:</p>
+</code></pre><p>The solution was to write a small bash function in my _~/.bash<em>profile</em>. This is it:</p>
 <pre><code>function up {
 
   cwd=$(pwd);
@@ -49,8 +49,7 @@
 
     # Excute the command.
     cd &quot;$cds&quot;
-  else                                                                          
-    cd ../
+  else<br>    cd ../
   fi
 
 }
