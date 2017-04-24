@@ -6,7 +6,7 @@
     "url": "https://pricklydev.work",
     "theme": "gin-whitepaper",
     "meta": {
-      "foot": "%3Cscript%3E%0D%0A%20%20(function(i%2Cs%2Co%2Cg%2Cr%2Ca%2Cm)%7Bi%5B'GoogleAnalyticsObject'%5D%3Dr%3Bi%5Br%5D%3Di%5Br%5D%7C%7Cfunction()%7B%0D%0A%20%20(i%5Br%5D.q%3Di%5Br%5D.q%7C%7C%5B%5D).push(arguments)%7D%2Ci%5Br%5D.l%3D1*new%20Date()%3Ba%3Ds.createElement(o)%2C%0D%0A%20%20m%3Ds.getElementsByTagName(o)%5B0%5D%3Ba.async%3D1%3Ba.src%3Dg%3Bm.parentNode.insertBefore(a%2Cm)%0D%0A%20%20%7D)(window%2Cdocument%2C'script'%2C'https%3A%2F%2Fwww.google-analytics.com%2Fanalytics.js'%2C'ga')%3B%0D%0A%0D%0A%20%20ga('create'%2C%20'UA-70657467-1'%2C%20'auto')%3B%0D%0A%20%20ga('send'%2C%20'pageview')%3B%0D%0A%0D%0A%3C%2Fscript%3E"
+      "foot": ""
     }
   }
 }
