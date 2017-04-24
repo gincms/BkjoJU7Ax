@@ -2,7 +2,7 @@
 {% for item in items %}
   <li> 
     <article>
-      <p>{{item.title}}</p>
+      <p><a href="{{item.url}}">{{item.title}}</a></p>
       {% if item.subtitle %}
       <p>{{item.subtitle}}</p>
       {% endif %}

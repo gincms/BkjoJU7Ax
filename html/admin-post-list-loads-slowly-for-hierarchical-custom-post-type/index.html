@@ -6,38 +6,40 @@
   <link rel="stylesheet" href="/gin-data/themes/gin-whitepaper/css/main.css">
 </head>
 <body>
-<section class="section">
-  <div class="container">
-    <div class="heading">
-      
+<article>
+  <section class="section">
+    <div class="container">
+      <div class="heading">
+        
     <h1 class="title">
       <a href="/admin-post-list-loads-slowly-for-hierarchical-custom-post-type/">Admin Post List Loads Slowly For Hierarchical Custom Post Type</a>
     </h1>
     
 
+      </div>
     </div>
-  </div>
-</section>
-<div class="container">
-  <section id="primary-content" class="content">
-    
+  </section>
+  <section class="section">
+    <div class="container">
+      <div id="primary-content" class="content">
+        
     <article>
       <section class="content-body">
-      &lt;p&gt;Here’s a problem I encountered a while ago. The list page for a custom post type in WordPress’s admin area started taking longer and longer to load, until one day it just started timing out completely. I googled all over the place and the &lt;a href=&quot;http://wordpress.stackexchange.com/questions/96101/wordpress-custom-post-type-admin-page-really-slow&quot;&gt;solutions&lt;/a&gt; I kept encountering were the same, albeit in &lt;a href=&quot;http://wordpress.stackexchange.com/questions/192165/solution-for-extremely-slow-pages-or-custom-post-in-wp-admin&quot;&gt;different flavours&lt;/a&gt;: set &lt;code&gt;hierarchical&lt;/code&gt; to &lt;code&gt;false&lt;/code&gt; in the custom post type’s definition.&lt;/p&gt;
-&lt;h3 id=&quot;back-in-the-real-world-&quot;&gt;Back in the real world…&lt;/h3&gt;
-&lt;p&gt;There are a few reasons why this “solution” is inadequate:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;It doesn’t actually offer any explanation of &lt;em&gt;why&lt;/em&gt; the admin page grinds to halt when trying to list hierarchical post types. Instead, it quietly sweeps it under the carpet.&lt;/li&gt;
-&lt;li&gt;In the case of conditionally setting &lt;code&gt;hierarchical&lt;/code&gt; to &lt;code&gt;false&lt;/code&gt; depending on whether or not &lt;code&gt;is_admin() == true&lt;/code&gt;, it’s inconvenient and impractical. If a CPT has been made hierarchical, it’s likely because there are (or will be) relationships within collections of posts that need to be maintained. This is impossible to do if you disable the CPT’s hierarchical structure “only” in admin. It makes no sense.&lt;/li&gt;
-&lt;li&gt;If you used a plugin (like CustomPress) to create the CPT, there’s no way to disable &lt;code&gt;hierarchical&lt;/code&gt; conditionally, so option #2 is no option at all (unless you want to hack the plugin, which would be ill-advised).&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;oh-my-gawd-you-re-awesome-it-s-fixed-&quot;&gt;Oh my gawd! You’re awesome! It’s fixed!&lt;/h3&gt;
-&lt;p&gt;The types of responses I was seeing when the above was offered as a solution… Yawn. Meanwhile, I was thinking, &lt;em&gt;WTF? This is telling me nothing. I doubt my employer is going to accept disabling hierarchy for a CPT that has 20,000 posts, and many existing hierarchical relationships to boot.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;So, I thought, &lt;em&gt;fuck what these people are saying&lt;/em&gt;. I need to find the real cause, and &lt;em&gt;then&lt;/em&gt; maybe I can come up with and implement an acceptable solution. As is often the case, I had to go diving into the WordPress source code — one of my least favourite activities.&lt;/p&gt;
-&lt;h3 id=&quot;wp-_dropdown-_pages&quot;&gt;wp_dropdown_pages&lt;/h3&gt;
-&lt;p&gt;I narrowed down the problem to &lt;code&gt;/wp-admin/includes/class-wp-posts-list-table.php&lt;/code&gt;. Specifically, this block, beginning around line 1100:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;if ( $bulk )
-    $dropdown_args[&amp;#39;show_option_no_change&amp;#39;] =  __( &amp;#39;— No Change —&amp;#39; );
+      <p>Here’s a problem I encountered a while ago. The list page for a custom post type in WordPress’s admin area started taking longer and longer to load, until one day it just started timing out completely. I googled all over the place and the <a href="http://wordpress.stackexchange.com/questions/96101/wordpress-custom-post-type-admin-page-really-slow">solutions</a> I kept encountering were the same, albeit in <a href="http://wordpress.stackexchange.com/questions/192165/solution-for-extremely-slow-pages-or-custom-post-in-wp-admin">different flavours</a>: set <code>hierarchical</code> to <code>false</code> in the custom post type’s definition.</p>
+<h3 id="back-in-the-real-world-">Back in the real world…</h3>
+<p>There are a few reasons why this “solution” is inadequate:</p>
+<ol>
+<li>It doesn’t actually offer any explanation of <em>why</em> the admin page grinds to halt when trying to list hierarchical post types. Instead, it quietly sweeps it under the carpet.</li>
+<li>In the case of conditionally setting <code>hierarchical</code> to <code>false</code> depending on whether or not <code>is_admin() == true</code>, it’s inconvenient and impractical. If a CPT has been made hierarchical, it’s likely because there are (or will be) relationships within collections of posts that need to be maintained. This is impossible to do if you disable the CPT’s hierarchical structure “only” in admin. It makes no sense.</li>
+<li>If you used a plugin (like CustomPress) to create the CPT, there’s no way to disable <code>hierarchical</code> conditionally, so option #2 is no option at all (unless you want to hack the plugin, which would be ill-advised).</li>
+</ol>
+<h3 id="oh-my-gawd-you-re-awesome-it-s-fixed-">Oh my gawd! You’re awesome! It’s fixed!</h3>
+<p>The types of responses I was seeing when the above was offered as a solution… Yawn. Meanwhile, I was thinking, <em>WTF? This is telling me nothing. I doubt my employer is going to accept disabling hierarchy for a CPT that has 20,000 posts, and many existing hierarchical relationships to boot.</em></p>
+<p>So, I thought, <em>fuck what these people are saying</em>. I need to find the real cause, and <em>then</em> maybe I can come up with and implement an acceptable solution. As is often the case, I had to go diving into the WordPress source code — one of my least favourite activities.</p>
+<h3 id="wp-_dropdown-_pages">wp_dropdown_pages</h3>
+<p>I narrowed down the problem to <code>/wp-admin/includes/class-wp-posts-list-table.php</code>. Specifically, this block, beginning around line 1100:</p>
+<pre><code>if ( $bulk )
+    $dropdown_args[&#39;show_option_no_change&#39;] =  __( &#39;— No Change —&#39; );
 
 /**
  * Filter the arguments used to generate the Quick Edit page-parent drop-down.
@@ -48,36 +50,43 @@
  *
  * @param array $dropdown_args An array of arguments.
  */
-$dropdown_args = apply_filters( &amp;#39;quick_edit_dropdown_pages_args&amp;#39;, $dropdown_args );
+$dropdown_args = apply_filters( &#39;quick_edit_dropdown_pages_args&#39;, $dropdown_args );
 
 wp_dropdown_pages( $dropdown_args );
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;wp_dropdown_pages&lt;/code&gt; is used to render a drop-down list that’s used in the quick-edit menu. The page was hanging at this point, presumably because it was running a bunch of queries to retrieve all the pages. Here’s the thing: our custom post &lt;em&gt;didn’t even use&lt;/em&gt; this drop-down list. I soon discovered that &lt;code&gt;wp_dropdown_pages&lt;/code&gt; defaults to retrieving &lt;em&gt;all&lt;/em&gt; pages and child pages, and lists the complete hierarchy. And, of course, it’s doing this for each post on the CPT’s list page. I guess it wasn’t considered what might happen when there are &lt;em&gt;thousands&lt;/em&gt; of hierarchical pages!&lt;/p&gt;
-&lt;p&gt;Fortunately, there&amp;#39;s an accompanying filter (above) so that you can alter &lt;code&gt;wp_dropdown_pages&lt;/code&gt;&amp;#39;s behaviour. This is done by limiting the &lt;code&gt;depth&lt;/code&gt; of the retrieval to only 1 level (learn more about it &lt;a href=&quot;https://codex.wordpress.org/Function_Reference/wp_dropdown_pages&quot;&gt;here&lt;/a&gt;).&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;function alter_wp_dropdown_pages_args($args) {
+</code></pre><p><code>wp_dropdown_pages</code> is used to render a drop-down list that’s used in the quick-edit menu. The page was hanging at this point, presumably because it was running a bunch of queries to retrieve all the pages. Here’s the thing: our custom post <em>didn’t even use</em> this drop-down list. I soon discovered that <code>wp_dropdown_pages</code> defaults to retrieving <em>all</em> pages and child pages, and lists the complete hierarchy. And, of course, it’s doing this for each post on the CPT’s list page. I guess it wasn’t considered what might happen when there are <em>thousands</em> of hierarchical pages!</p>
+<p>Fortunately, there&#39;s an accompanying filter (above) so that you can alter <code>wp_dropdown_pages</code>&#39;s behaviour. This is done by limiting the <code>depth</code> of the retrieval to only 1 level (learn more about it <a href="https://codex.wordpress.org/Function_Reference/wp_dropdown_pages">here</a>).</p>
+<pre><code>function alter_wp_dropdown_pages_args($args) {
 
     // Because I only care about it happening on the list page for my special post type. 
-    if (is_admin() &amp;amp;&amp;amp; preg_match(&amp;#39;@^/wp-admin/edit.php@&amp;#39;, $_SERVER[&amp;#39;REQUEST_URI&amp;#39;]) &amp;amp;&amp;amp; $_GET[&amp;#39;post_type&amp;#39;] == &amp;#39;my-special-post-type&amp;#39;) {
-        $args[&amp;#39;depth&amp;#39;] = 1;
+    if (is_admin() &amp;&amp; preg_match(&#39;@^/wp-admin/edit.php@&#39;, $_SERVER[&#39;REQUEST_URI&#39;]) &amp;&amp; $_GET[&#39;post_type&#39;] == &#39;my-special-post-type&#39;) {
+        $args[&#39;depth&#39;] = 1;
     }
 }
-add_filter(&amp;#39;quick_edit_dropdown_pages_args&amp;#39;, &amp;#39;alter_wp_dropdown_pages_args&amp;#39;, 10, 1);
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;As soon as I did this, the CPT’s list page started loading as quickly as any other page in admin. But this only became an issue in the first place because a menu was being loaded that isn’t actually used. Ideally, what I really want to do is prevent the quick-edit menu from loading at all. I discovered &lt;a href=&quot;https://wordpress.org/support/topic/remove-quick-edit-from-custom-post-type&quot;&gt;this&lt;/a&gt; (once I knew what I was looking for):&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;function remove_quick_edit($actions) {
+add_filter(&#39;quick_edit_dropdown_pages_args&#39;, &#39;alter_wp_dropdown_pages_args&#39;, 10, 1);
+</code></pre><p>As soon as I did this, the CPT’s list page started loading as quickly as any other page in admin. But this only became an issue in the first place because a menu was being loaded that isn’t actually used. Ideally, what I really want to do is prevent the quick-edit menu from loading at all. I discovered <a href="https://wordpress.org/support/topic/remove-quick-edit-from-custom-post-type">this</a> (once I knew what I was looking for):</p>
+<pre><code>function remove_quick_edit($actions) {
     global $post;
 
-    if ($post-&amp;gt;post_type == &amp;#39;my-special-post-type&amp;#39;) {
-        unset($actions[&amp;#39;inline hide-if-no-js&amp;#39;]);
+    if ($post-&gt;post_type == &#39;my-special-post-type&#39;) {
+        unset($actions[&#39;inline hide-if-no-js&#39;]);
     }
 }
-add_filter(&amp;#39;post_row_actions&amp;#39;,&amp;#39;remove_quick_edit&amp;#39;, 10, 2);
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Either of the above solutions will eliminate the slow-loading post list in admin. I found that the issue was limited to hierarchical CPT’s that had a large number of posts. Those are ways to fix it.&lt;/p&gt;
+add_filter(&#39;post_row_actions&#39;,&#39;remove_quick_edit&#39;, 10, 2);
+</code></pre><p>Either of the above solutions will eliminate the slow-loading post list in admin. I found that the issue was limited to hierarchical CPT’s that had a large number of posts. Those are ways to fix it.</p>
 
       </section>
     </article>
 
+      </div>
+    </div>
   </section>
-</div>
-
+</article>
+<footer class="footer">
+  <p class="has-text-centered">
+    <a href="https://twitter.com/LatnBlack">Twitter</a>
+  </p>
   
+  
+</footer>
 </body>
 </html>

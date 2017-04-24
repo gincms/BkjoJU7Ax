@@ -6,19 +6,28 @@
   <link rel="stylesheet" href="{{asset('css/main.css')}}">
 </head>
 <body>
-<section class="section">
-  <div class="container">
-    <div class="heading">
-      {% block heading %}<em>Untitled</em>{% endblock %}
+<article>
+  <section class="section">
+    <div class="container">
+      <div class="heading">
+        {% block heading %}<em>Untitled</em>{% endblock %}
+      </div>
     </div>
-  </div>
-</section>
-<div class="container">
-  <section id="primary-content" class="content">
-    {% block content %} Nothing to see here {% endblock %}
   </section>
-</div>
-
-  {% block foot %}{% endblock%}
+  <section class="section">
+    <div class="container">
+      <div id="primary-content" class="content">
+        {% block content %} Nothing to see here {% endblock %}
+      </div>
+    </div>
+  </section>
+</article>
+<footer class="footer">
+  <p class="has-text-centered">
+    <a href="https://twitter.com/LatnBlack">Twitter</a>
+  </p>
+  {% block foot %}
+  {% endblock%}
+</footer>
 </body>
 </html>
