@@ -6,7 +6,7 @@
     "url": "https://pricklydev.work",
     "theme": "gin-whitepaper",
     "meta": {
-      "foot": ""
+      "foot": "%3Cscript%3Ealert(%22hi!)%3C%2Fscript%3E"
     }
   }
 }
