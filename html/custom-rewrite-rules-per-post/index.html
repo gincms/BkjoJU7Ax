@@ -34,7 +34,7 @@
      ),
     // ...more params...
 ));
-</code></pre><p>…instead of the <em>my_special_post_type</em> post having a permalink of <code><a href="http://www.mysite.com/horses/%postname%/">http://www.mysite.com/horses/%postname%/</a></code>, the user could override the default CPT base slug of <code>/horses/</code> and force the post to use <code><a href="http://www.mysite.com/unicorns/%postname%/">http://www.mysite.com/unicorns/%postname%/</a></code> instead.</p>
+</code></pre><p>…instead of the <em>my_special_post_type</em> post having a permalink of <code>http://www.mysite.com/horses/%postname%/</code>, the user could override the default CPT base slug of <code>/horses/</code> and force the post to use <code>http://www.mysite.com/unicorns/%postname%/</code> instead.</p>
 <h3 id="hooks-hacks">Hooks &amp; Hacks</h3>
 <p>If you don’t understand <a href="https://codex.wordpress.org/Function_Reference/register_post_type">custom post types</a>, you have no business attempting what follows. This isn’t <del>going</del> meant to be an in-depth, step-by-step walk through. I’m mainly writing this as a means to purge the experience from my system. Honestly, it feels very hacky, which shouldn’t really be the case, considering I’m doing it all “the WordPress way”. Everything was implemented using hooks and filters. Does that mean the WordPress way is hacky? Or am I just doing it wrong? You be the judge. Right now, I don’t give a shit. It works. Flawlessly. So far…</p>
 <h3 id="the-process">The Process</h3>
@@ -61,13 +61,13 @@ function my_init_function() {
 function add_my_special_rules() {
     global $wpdb;
 
-    $sql = &quot;SELECT <em>
-            FROM <code>wp_posts</code>
-            JOIN <code>wp_postmeta</code> ON <code>post_id</code> = <code>ID</code>
-            WHERE <code>post_type</code> = &#39;my_special_post_type&#39;
-            AND <code>post_status</code> = &#39;publish&#39;
-            AND <code>meta_key</code> = &#39;my_special_post_options&#39;
-            AND <code>meta_value</code> LIKE &#39;%my_slug_override%&#39;&quot;;
+    $sql = &quot;SELECT *
+            FROM `wp_posts`
+            JOIN `wp_postmeta` ON `post_id` = `ID`
+            WHERE `post_type` = &#39;my_special_post_type&#39;
+            AND `post_status` = &#39;publish&#39;
+            AND `meta_key` = &#39;my_special_post_options&#39;
+            AND `meta_value` LIKE &#39;%my_slug_override%&#39;&quot;;
 
     $results = $wpdb-&gt;get_results($sql);
 
@@ -83,7 +83,7 @@ function add_my_special_rules() {
     }
 }
 </code></pre><p>This isn’t the precise code I used, so don’t just lift it and expect it to work. My actual implementation was part of a class in a plugin, where as the above could be in the functions.php. It’s essentially the same, though. Also, it was for a hierarchical CPT, but the above is for a non-hierarchical CPT for the sake of simplicity.</p>
-<p>For a hierarchical CPT, you might only want the override option on the top level post, and have all child pages’s slugs derived from that. You may also want to match on anything <em>starting with</em> the post name (e.g. <code>&quot;^{$options[&#39;my_slug_override&#39;]}/({$post-&gt;post_name}.</em>)/?$&quot;</code>, which is what’s in my original implementation) rather than what is above. It depends on the nature of the post type, I guess.</p>
+<p>For a hierarchical CPT, you might only want the override option on the top level post, and have all child pages’s slugs derived from that. You may also want to match on anything <em>starting with</em> the post name (e.g. <code>&quot;^{$options[&#39;my_slug_override&#39;]}/({$post-&gt;post_name}.*)/?$&quot;</code>, which is what’s in my original implementation) rather than what is above. It depends on the nature of the post type, I guess.</p>
 <p>And if you’re wondering why I added a rewrite rule for each post, rather than one for each distinct base, it’s so that posts that weren’t meant to be found via that base, aren’t. This way, a page that’s only meant to be found via <code>/horses/mister-ed/</code> won’t also be found via <code>/unicorns/mister-ed/</code>.</p>
 <h3 id="override-permalinks">Override Permalinks</h3>
 <p>Like a good little WP soldier, I use <code>get_permalink()</code> and <code>the_permalink()</code> (but not repeatedly within the same template!) to construct URLs whenever I can. The problem with these functions is that they determine part of the permalink structure from the <code>rewrite</code> params supplied when the post type was registered. Shit.</p>
@@ -102,7 +102,7 @@ function add_my_special_rules() {
     return $url;
 }
 </code></pre><h3 id="redirect-the-real-permalink">Redirect The “Real” Permalink</h3>
-<p>The rewrite rules added dynamically via the <code>init</code> action hook make the posts with a custom base accessible (i.e. you don’t get a 404), but they’re still accessible through their “real” URL too. For example, <code><a href="http://www.mysite.com/unicorns/better-than-horses/">http://www.mysite.com/unicorns/better-than-horses/</a></code> is still accessible via <code><a href="http://www.mysite.com/horses/better-than-horses/">http://www.mysite.com/horses/better-than-horses/</a></code> at this point. Definitely don’t want that. For this, I hooked into the <code>template_redirect</code> action hook.</p>
+<p>The rewrite rules added dynamically via the <code>init</code> action hook make the posts with a custom base accessible (i.e. you don’t get a 404), but they’re still accessible through their “real” URL too. For example, <code>http://www.mysite.com/unicorns/better-than-horses/</code> is still accessible via <code>http://www.mysite.com/horses/better-than-horses/</code> at this point. Definitely don’t want that. For this, I hooked into the <code>template_redirect</code> action hook.</p>
 <pre><code>function my_special_override() {
     global $post;
 
@@ -134,14 +134,14 @@ function add_my_special_rules() {
 <pre><code>public function flush_rules($hard = true) {
     delete_option(&#39;rewrite_rules&#39;);
     $this-&gt;wp_rewrite_rules();
-    /<em>*
-     </em> Filter whether a &quot;hard&quot; rewrite rule flush should be performed when requested.
-     <em>
-     </em> A &quot;hard&quot; flush updates .htaccess (Apache) or web.config (IIS).
-     <em>
-     </em> @since 3.7.0
-     <em>
-     </em> @param bool $hard Whether to flush rewrite rules &quot;hard&quot;. Default true.
+    /**
+     * Filter whether a &quot;hard&quot; rewrite rule flush should be performed when requested.
+     *
+     * A &quot;hard&quot; flush updates .htaccess (Apache) or web.config (IIS).
+     *
+     * @since 3.7.0
+     *
+     * @param bool $hard Whether to flush rewrite rules &quot;hard&quot;. Default true.
      */
     if ( ! $hard || ! apply_filters( &#39;flush_rewrite_rules_hard&#39;, true ) ) {
         return;
