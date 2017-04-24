@@ -41,14 +41,14 @@
 <pre><code>if ( $bulk )
     $dropdown_args[&#39;show_option_no_change&#39;] =  __( &#39;— No Change —&#39; );
 
-/**
- * Filter the arguments used to generate the Quick Edit page-parent drop-down.
- *
- * @since 2.7.0
- *
- * @see wp_dropdown_pages()
- *
- * @param array $dropdown_args An array of arguments.
+/<em>*
+ </em> Filter the arguments used to generate the Quick Edit page-parent drop-down.
+ <em>
+ </em> @since 2.7.0
+ <em>
+ </em> @see wp_dropdown_pages()
+ <em>
+ </em> @param array $dropdown_args An array of arguments.
  */
 $dropdown_args = apply_filters( &#39;quick_edit_dropdown_pages_args&#39;, $dropdown_args );
 
@@ -84,6 +84,9 @@ add_filter(&#39;post_row_actions&#39;,&#39;remove_quick_edit&#39;, 10, 2);
 <footer class="footer">
   <p class="has-text-centered">
     <a href="https://twitter.com/LatnBlack">Twitter</a>
+  </p>
+  <p class="has-text-centered">
+    <a href="https://latnblack.com">About me</a>
   </p>
   
   

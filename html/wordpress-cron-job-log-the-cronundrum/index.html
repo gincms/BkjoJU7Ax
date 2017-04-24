@@ -61,15 +61,15 @@ foreach ( $crons as $timestamp =&gt; $cronhooks ) {
 
             wp_unschedule_event( $timestamp, $hook, $v[&#39;args&#39;] );
 
-            /**
-             * Fires scheduled events.
-             *
-             * @internal
-             * @since 2.1.0
-             *
-             * @param string $hook Name of the hook that was scheduled to be fired.
-             * @param array  $args The arguments to be passed to the hook.
-             */
+            /<em>*
+             </em> Fires scheduled events.
+             <em>
+             </em> @internal
+             <em> @since 2.1.0
+             </em>
+             <em> @param string $hook Name of the hook that was scheduled to be fired.
+             </em> @param array  $args The arguments to be passed to the hook.
+             <em>/
             do_action_ref_array( $hook, $v[&#39;args&#39;] );
 
             // If the hook ran too long and another cron process stole the lock, quit.
@@ -89,7 +89,7 @@ foreach ( $crons as $timestamp =&gt; $cronhooks ) {
 <p>The solution was to take the code I’d sketched out while testing the filter for <code>get_option(&#39;cron&#39;)</code> and use it in my <code>schedule_event</code> filter callback to determine the likelihood that the cron is actually running. It looks something like this:</p>
 <pre><code>class My_Cron_Log_Class {
 
-    /* ...functions here... */
+    /</em> ...functions here... <em>/
 
     public function my_cron_schedule_filter_function($event) {
 
@@ -152,7 +152,7 @@ foreach ( $crons as $timestamp =&gt; $cronhooks ) {
         // Yay! Cron logged!
     }
 
-    /* ... more functions here... */
+    /</em> ... more functions here... */
 
 }
 </code></pre><p>I’m going to turn this into a plugin. It feels like something that should be available. The above won’t work if <code>DISABLE_WP_CRON</code> is set to <code>true</code>, but if this is the case, you don’t need such a plugin. Good on you.</p>
@@ -167,6 +167,9 @@ foreach ( $crons as $timestamp =&gt; $cronhooks ) {
 <footer class="footer">
   <p class="has-text-centered">
     <a href="https://twitter.com/LatnBlack">Twitter</a>
+  </p>
+  <p class="has-text-centered">
+    <a href="https://latnblack.com">About me</a>
   </p>
   
   
