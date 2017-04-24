@@ -3,8 +3,12 @@
   <li> 
     <article>
       <p>{{item.title}}</p>
+      {% if item.subtitle %}
       <p>{{item.subtitle}}</p>
+      {% endif %}
+      {% if item.summary %}
       <p>{{item.summary}}</p>
+      {% endif %}
     </article>
   </li>
 {% endfor %}
