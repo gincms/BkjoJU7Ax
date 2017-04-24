@@ -35,18 +35,19 @@
   cds=&quot;&quot;;
   i=0;
 
+    # If we have an argument and it&#39;s &gt; 1, proceed.
   if [ $1 ] &amp;&amp; [ $1 -gt 0 ]
   then
 
     i=$1
 
-    # Add the levels to the string
+    # Add the levels to the string.
     while [ &quot;$i&quot; -ne &quot;0&quot; ]; do
       cds=&quot;$cds../&quot;;
       i=$(expr $i - 1);
     done
 
-    # Excute the command
+    # Excute the command.
     cd &quot;$cds&quot;
   else                                                                          
     cd ../
