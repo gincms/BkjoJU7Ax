@@ -1,0 +1,10 @@
+{
+  "title": "This is a test",
+  "slug": "testing-01",
+  "language": "javascript",
+  "code": "void function() {\r\n  alert(\"Woo!\");\r\n}",
+  "contentType": "codeblock",
+  "url": "/testing-01/",
+  "id": "H1TWQk-JW",
+  "created": "2017-04-28T15:43:01.414Z"
+}
