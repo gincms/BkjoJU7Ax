@@ -52,7 +52,8 @@ module.exports = {
       "name": "code",
       "label": "Code",
       "type": "textarea",
-      "placeholder": "Code"
+      "placeholder": "Code",
+      "editor": "markdown"
     }
   }
 }
