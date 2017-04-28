@@ -47,6 +47,12 @@ module.exports = {
           "value": "css"
         }
       ]
+    },
+    "code": {
+      "name": "code",
+      "label": "Code",
+      "type": "textarea",
+      "placeholder": "Code"
     }
   }
 }
