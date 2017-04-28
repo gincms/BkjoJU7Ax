@@ -5,6 +5,8 @@
 module.exports = {
   "name": "codeblock",
   "label": "Codeblock",
+  "icon": "code",
+  "description": "For code examples.",
   "fields": {
     "title": {
       "name": "title",
@@ -43,6 +45,10 @@ module.exports = {
         {
           "label": "CSS",
           "value": "css"
+        },
+        {
+          "label": "",
+          "value": ""
         }
       ]
     }
