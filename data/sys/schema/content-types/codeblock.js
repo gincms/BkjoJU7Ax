@@ -45,10 +45,6 @@ module.exports = {
         {
           "label": "CSS",
           "value": "css"
-        },
-        {
-          "label": "",
-          "value": ""
         }
       ]
     }
