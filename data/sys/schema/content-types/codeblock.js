@@ -53,7 +53,7 @@ module.exports = {
       "label": "Code",
       "type": "textarea",
       "placeholder": "Code",
-      "editor": "markdown"
+      "editor": "code"
     }
   }
 }
