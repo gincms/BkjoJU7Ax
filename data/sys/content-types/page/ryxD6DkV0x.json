@@ -4,12 +4,15 @@
   "slug": "building-a-wordpress-theme",
   "section": "",
   "url": "/building-a-wordpress-theme/",
-  "body": "\nOne of the first things people do when they decide to setup a WordPress site is go hunting for a theme. Even though I have no intention of using a pre-built theme for this blog — besides the temporary use of the Twenty Fifteen theme while I build one — I still found myself looking for a *starter* theme. The hope was that I could give myself a head start.\n\nUnfortunately, there are a few problems with these starter themes:\n\n- Even the [barest starter](https://themes.svn.wordpress.org/blankslate/4.0.2/functions.php) themes contain more code than I’d want in a starter theme\n- They have a file structure I don’t appreciate (i.e. little-to-no [file organisation](https://developer.wordpress.org/themes/basics/linking-theme-files-directories/))\n- They don’t [trim](https://www.google.co.uk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=clean%20up%20wordpress%20header) any of the fat that often hangs loosely from the head section of WordPress themes\n\nThe point: the starter themes start in the *wrong* place (for my purposes). Besides, the theme I’m going to build for this site will likely be far from conventional. For these reasons, I’m going to skip the starter all together and just build from scratch, as originally intended.\n\n\n",
+  "body": "One of the first things people do when they decide to setup a WordPress site is go hunting for a theme. Even though I have no intention of using a pre-built theme for this blog — besides the temporary use of the Twenty Fifteen theme while I build one — I still found myself looking for a *starter* theme. The hope was that I could give myself a head start.\r\n\r\nUnfortunately, there are a few problems with these starter themes:\r\n\r\n- Even the [barest starter](https://themes.svn.wordpress.org/blankslate/4.0.2/functions.php) themes contain more code than I’d want in a starter theme\r\n- They have a file structure I don’t appreciate (i.e. little-to-no [file organisation](https://developer.wordpress.org/themes/basics/linking-theme-files-directories/))\r\n- They don’t [trim](https://www.google.co.uk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=clean%20up%20wordpress%20header) any of the fat that often hangs loosely from the head section of WordPress themes\r\n\r\nThe point: the starter themes start in the *wrong* place (for my purposes). Besides, the theme I’m going to build for this site will likely be far from conventional. For these reasons, I’m going to skip the starter all together and just build from scratch, as originally intended.\r\n\r\n\r\n",
+  "featured-image": {
+    "src": ""
+  },
   "summary": "",
   "blog": "1",
   "created": "2015-09-14T23:21:27.000Z",
-  "updated": "2017-02-10T21:19:51.000Z",
-  "published": "",
+  "updated": "2017-05-04T22:33:20.397Z",
+  "published": "2017-05-04T22:31:53.845Z",
   "contentType": "page",
   "id": "ryxD6DkV0x"
 }
