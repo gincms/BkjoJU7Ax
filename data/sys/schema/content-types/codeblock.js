@@ -55,5 +55,15 @@ module.exports = {
       "placeholder": "Code",
       "editor": "code"
     }
+  },
+  "assets": {
+    "js": [
+      "/lib/codemirror/lib/codemirror.js",
+      "/lib/codemirror/addon/edit/matchbrackets.js",
+      "/lib/codemirror/addon/edit/matchtags.js",
+      "/lib/codemirror/addon/edit/closebrackets.js",
+      "/lib/codemirror/addon/edit/closetag.js"
+     ],
+    "css": ["/lib/codemirror/lib/codemirror.css"]
   }
 }
