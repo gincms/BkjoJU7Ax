@@ -2,8 +2,8 @@
   "title": "Gin",
   "subtitle": "A distributed, Git-integrated CMS",
   "slug": "index",
-  "section": "gin",
-  "url": "/gin/",
+  "section": "gincms",
+  "url": "/gincms/",
   "body": "",
   "featured-image": {
     "src": ""
@@ -11,7 +11,7 @@
   "summary": "",
   "blog": "1",
   "created": "2017-05-07T19:33:52.647Z",
-  "updated": "",
+  "updated": "2017-05-07T20:31:32.492Z",
   "published": "",
   "contentType": "page",
   "id": "HkKsUxpkW"
