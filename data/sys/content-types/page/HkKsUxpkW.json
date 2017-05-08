@@ -4,14 +4,14 @@
   "slug": "index",
   "section": "gincms",
   "url": "/gincms/",
-  "body": "",
+  "body": "I needed a CMS that allowed me to work offline. I wanted something that felt lightweight, produced content that could be deployed anywhere, but still had some of the niceties of traditional content management systems. Most importantly, I wanted _everything_ to be undoable.\r\n\r\nI couldn't find a CMS that provided all of the above. So I built one. It's called ***Gin***.\r\n\r\n## Rewind\r\n\r\nIf you've ever lost data, whether due to a technical failure or human error, you know how painful it can be. I suffered an *almost* catastrophic loss myself, due to my own mistake (read: complacency).\r\n\r\nGin is designed to protect _everything_, from code to content. How? By bringing to content creation something that has been part of development process for years — **version control**.\r\n\r\nGin is built on the most used and most loved version control system there is: **[Git](https://git-scm.com)**.  Not only that, but the content is stored securely in the most popular platform for hosting Git repositories: **[GitHub](https://github.com)**.\r\n\r\n",
   "featured-image": {
     "src": ""
   },
   "summary": "",
   "blog": "1",
   "created": "2017-05-07T19:33:52.647Z",
-  "updated": "2017-05-07T20:31:32.492Z",
+  "updated": "2017-05-08T21:19:41.501Z",
   "published": "",
   "contentType": "page",
   "id": "HkKsUxpkW"
