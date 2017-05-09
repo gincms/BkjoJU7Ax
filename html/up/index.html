@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head data-gincb="1493113304199">
+<head data-gincb="1494326196110">
   <meta charset="UTF-8">
   <title>Up - Prickly Dev</title>
   <link rel="stylesheet" href="/gin-data/themes/gin-whitepaper/css/main.css">
@@ -9,26 +9,32 @@
 <article>
   <section class="section">
     <div class="container">
-      <div class="heading">
-        
+      <div class="columns">
+        <div class="column is-8 is-offset-2">
+          <div class="heading">
+            
     <h1 class="title">
       <a href="/up/">Up</a>
     </h1>
     
 
+          </div>
+        </div>
       </div>
     </div>
   </section>
   <section class="section">
     <div class="container">
-      <div id="primary-content" class="content">
-        
+      <div class="columns">
+        <div class="column is-8 is-offset-2">
+          <div id="primary-content" class="content">
+            
     <article>
       <section class="content-body">
       <p>I tend to eliminate repetitive tasks at the earliest possible opportunity. It&#39;s partly because I&#39;m lazy, but mostly because I don&#39;t like wasting time or energy. In other words, I appreciate efficiency.</p>
 <p>When on the command line I&#39;m frequently moving between directories, often going several levels deep before having to resurface to move into another. Far too often this means I end up having to type:</p>
 <pre><code>cd ../../../../
-</code></pre><p>The solution was to write a small bash function in my _~/.bash<em>profile</em>. This is it:</p>
+</code></pre><p>The solution was to write a small bash function in my _~/.bash_profile_. This is it:</p>
 <pre><code>function up {
 
   cwd=$(pwd);
@@ -49,7 +55,8 @@
 
     # Excute the command.
     cd &quot;$cds&quot;
-  else<br>    cd ../
+  else                                                                          
+    cd ../
   fi
 
 }
@@ -60,6 +67,8 @@
       </section>
     </article>
 
+          </div>
+        </div>
       </div>
     </div>
   </section>

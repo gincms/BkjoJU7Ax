@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head data-gincb="1493113304199">
+<head data-gincb="1494326196110">
   <meta charset="UTF-8">
   <title>Wordpress Cron Job Log (The Cronundrum) - Prickly Dev</title>
   <link rel="stylesheet" href="/gin-data/themes/gin-whitepaper/css/main.css">
@@ -9,20 +9,26 @@
 <article>
   <section class="section">
     <div class="container">
-      <div class="heading">
-        
+      <div class="columns">
+        <div class="column is-8 is-offset-2">
+          <div class="heading">
+            
     <h1 class="title">
       <a href="/wordpress-cron-job-log-the-cronundrum/">Wordpress Cron Job Log (The Cronundrum)</a>
     </h1>
     
 
+          </div>
+        </div>
       </div>
     </div>
   </section>
   <section class="section">
     <div class="container">
-      <div id="primary-content" class="content">
-        
+      <div class="columns">
+        <div class="column is-8 is-offset-2">
+          <div id="primary-content" class="content">
+            
     <article>
       <section class="content-body">
       <p>Like most people, I don’t like it when my basic needs aren’t met. Recently, I had the basic need to know when a WordPress [<a href="https://www.lucasrolff.com/wordpress/why-wp-cron-sucks/">pseudo</a>-]cron job had last run. It turns out, WordPress doesn’t provide a straightforward way of showing this information. In fact, it doesn’t even provide an in-built way to <em>log</em> this information. <em>WTF?</em></p>
@@ -61,15 +67,15 @@ foreach ( $crons as $timestamp =&gt; $cronhooks ) {
 
             wp_unschedule_event( $timestamp, $hook, $v[&#39;args&#39;] );
 
-            /<em>*
-             </em> Fires scheduled events.
-             <em>
-             </em> @internal
-             <em> @since 2.1.0
-             </em>
-             <em> @param string $hook Name of the hook that was scheduled to be fired.
-             </em> @param array  $args The arguments to be passed to the hook.
-             <em>/
+            /**
+             * Fires scheduled events.
+             *
+             * @internal
+             * @since 2.1.0
+             *
+             * @param string $hook Name of the hook that was scheduled to be fired.
+             * @param array  $args The arguments to be passed to the hook.
+             */
             do_action_ref_array( $hook, $v[&#39;args&#39;] );
 
             // If the hook ran too long and another cron process stole the lock, quit.
@@ -89,7 +95,7 @@ foreach ( $crons as $timestamp =&gt; $cronhooks ) {
 <p>The solution was to take the code I’d sketched out while testing the filter for <code>get_option(&#39;cron&#39;)</code> and use it in my <code>schedule_event</code> filter callback to determine the likelihood that the cron is actually running. It looks something like this:</p>
 <pre><code>class My_Cron_Log_Class {
 
-    /</em> ...other functions here... <em>/
+    /* ...other functions here... */
 
     public function my_cron_schedule_filter_function($event) {
 
@@ -152,7 +158,7 @@ foreach ( $crons as $timestamp =&gt; $cronhooks ) {
         // Yay! Cron logged!
     }
 
-    /</em> ... more functions here... */
+    /* ... more functions here... */
 
 }
 </code></pre><p>I’m going to turn this into a plugin. It feels like something that should be available. The above won’t work if <code>DISABLE_WP_CRON</code> is set to <code>true</code>, but if this is the case, you don’t need such a plugin. Good on you.</p>
@@ -160,6 +166,8 @@ foreach ( $crons as $timestamp =&gt; $cronhooks ) {
       </section>
     </article>
 
+          </div>
+        </div>
       </div>
     </div>
   </section>

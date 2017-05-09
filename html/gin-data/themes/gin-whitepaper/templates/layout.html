@@ -9,15 +9,23 @@
 <article>
   <section class="section">
     <div class="container">
-      <div class="heading">
-        {% block heading %}<em>Untitled</em>{% endblock %}
+      <div class="columns">
+        <div class="column is-8 is-offset-2">
+          <div class="heading">
+            {% block heading %}<em>Untitled</em>{% endblock %}
+          </div>
+        </div>
       </div>
     </div>
   </section>
   <section class="section">
     <div class="container">
-      <div id="primary-content" class="content">
-        {% block content %} Nothing to see here {% endblock %}
+      <div class="columns">
+        <div class="column is-8 is-offset-2">
+          <div id="primary-content" class="content">
+            {% block content %} Nothing to see here {% endblock %}
+          </div>
+        </div>
       </div>
     </div>
   </section>

@@ -9,14 +9,22 @@
 <header class="hero">
   <div class="hero-body">
     <div class="container">
-     {% block header %}{% endblock %} 
+      <div class="columns">
+        <div class="column is-8 is-offset-2">
+          {% block header %}{% endblock %} 
+        </div>
+      </div>
     </div>
   </div>
 </header>
 <section class="section">
   <div class="container">
     <section id="primary-content" class="content">
-      {% block content %} Nothing to see here {% endblock %}
+      <div class="columns">
+        <div class="column is-8 is-offset-2">
+          {% block content %} Nothing to see here {% endblock %}
+        </div>
+      </div>
     </section>
   </div>
 </section>

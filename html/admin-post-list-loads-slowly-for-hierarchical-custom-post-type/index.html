@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head data-gincb="1493113304199">
+<head data-gincb="1494326196110">
   <meta charset="UTF-8">
   <title>Admin Post List Loads Slowly For Hierarchical Custom Post Type - Prickly Dev</title>
   <link rel="stylesheet" href="/gin-data/themes/gin-whitepaper/css/main.css">
@@ -9,20 +9,26 @@
 <article>
   <section class="section">
     <div class="container">
-      <div class="heading">
-        
+      <div class="columns">
+        <div class="column is-8 is-offset-2">
+          <div class="heading">
+            
     <h1 class="title">
       <a href="/admin-post-list-loads-slowly-for-hierarchical-custom-post-type/">Admin Post List Loads Slowly For Hierarchical Custom Post Type</a>
     </h1>
     
 
+          </div>
+        </div>
       </div>
     </div>
   </section>
   <section class="section">
     <div class="container">
-      <div id="primary-content" class="content">
-        
+      <div class="columns">
+        <div class="column is-8 is-offset-2">
+          <div id="primary-content" class="content">
+            
     <article>
       <section class="content-body">
       <p>Here’s a problem I encountered a while ago. The list page for a custom post type in WordPress’s admin area started taking longer and longer to load, until one day it just started timing out completely. I googled all over the place and the <a href="http://wordpress.stackexchange.com/questions/96101/wordpress-custom-post-type-admin-page-really-slow">solutions</a> I kept encountering were the same, albeit in <a href="http://wordpress.stackexchange.com/questions/192165/solution-for-extremely-slow-pages-or-custom-post-in-wp-admin">different flavours</a>: set <code>hierarchical</code> to <code>false</code> in the custom post type’s definition.</p>
@@ -41,14 +47,14 @@
 <pre><code>if ( $bulk )
     $dropdown_args[&#39;show_option_no_change&#39;] =  __( &#39;— No Change —&#39; );
 
-/<em>*
- </em> Filter the arguments used to generate the Quick Edit page-parent drop-down.
- <em>
- </em> @since 2.7.0
- <em>
- </em> @see wp_dropdown_pages()
- <em>
- </em> @param array $dropdown_args An array of arguments.
+/**
+ * Filter the arguments used to generate the Quick Edit page-parent drop-down.
+ *
+ * @since 2.7.0
+ *
+ * @see wp_dropdown_pages()
+ *
+ * @param array $dropdown_args An array of arguments.
  */
 $dropdown_args = apply_filters( &#39;quick_edit_dropdown_pages_args&#39;, $dropdown_args );
 
@@ -77,6 +83,8 @@ add_filter(&#39;post_row_actions&#39;,&#39;remove_quick_edit&#39;, 10, 2);
       </section>
     </article>
 
+          </div>
+        </div>
       </div>
     </div>
   </section>
