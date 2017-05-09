@@ -4,14 +4,14 @@
   "slug": "why-the-world-needs-another-cms",
   "section": "gin",
   "url": "/gin/why-the-world-needs-another-cms/",
-  "body": "Wait...what? Where's the directory I was just..? Oh, *shit*. I didn't. I couldn't have.... *Fuck. I did.* OK. Think. *Think*. How do you recover files deleted with `rm`? Maybe if that sector of the disk hasn't been overwritten, I can get back the SQLite DB...\r\n\r\n",
+  "body": "Wait...what? Where's the directory I was just..? Oh, *shit*. I didn't. I couldn't have.... *Fuck. I did.* OK. Think. *Think*. How do you recover files deleted with `rm`? Maybe if that sector of the disk hasn't been overwritten, I can get back the SQLite DB...\r\n\r\n\r\nHalf an hour or so of googling and try different software yields no results. There *has* to be another way. L",
   "featured-image": {
     "src": ""
   },
   "summary": "",
   "blog": "1",
   "created": "2017-05-07T19:36:39.172Z",
-  "updated": "2017-05-09T15:53:06.893Z",
+  "updated": "2017-05-09T16:28:40.024Z",
   "published": "",
   "contentType": "page",
   "id": "HJ18wlaJW"
