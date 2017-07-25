@@ -11,16 +11,16 @@
     "type": "page",
     "url": "/code-has-consequences/"
   },
-  "HJ5vaP1VCe": {
+  "S1vpv1E0x": {
     "type": "page",
-    "url": "/up/"
+    "url": "/gutting-wordpress/"
   },
-  "SkdPpD1N0g": {
+  "BJPDTv1V0e": {
     "type": "page",
-    "url": "/wordpress-heartbeat/"
+    "url": "/wordpress-cron-job-log-the-cronundrum/"
   },
-  "BkHvaPJN0g": {
+  "SJEPavJV0g": {
     "type": "page",
-    "url": "/custom-rewrite-rules-per-post/"
+    "url": "/admin-post-list-loads-slowly-for-hierarchical-custom-post-type/"
   }
 }
