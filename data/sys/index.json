@@ -11,20 +11,24 @@
     "type": "page",
     "url": "/code-has-consequences/"
   },
-  "S1vpv1E0x": {
+  "HJ5vaP1VCe": {
     "type": "page",
-    "url": "/gutting-wordpress/"
+    "url": "/up/"
   },
-  "BJPDTv1V0e": {
+  "SkdPpD1N0g": {
     "type": "page",
-    "url": "/wordpress-cron-job-log-the-cronundrum/"
+    "url": "/wordpress-heartbeat/"
   },
-  "SJEPavJV0g": {
+  "BkHvaPJN0g": {
     "type": "page",
-    "url": "/admin-post-list-loads-slowly-for-hierarchical-custom-post-type/"
+    "url": "/custom-rewrite-rules-per-post/"
   },
-  "ByZDawyVCg": {
+  "B17vaPkERl": {
     "type": "page",
-    "url": "/wordpress-asking-for-ftp-credentials/"
+    "url": "/customise-insert-edit-link-dialogue-box/"
+  },
+  "HJNMKpIAg": {
+    "type": "page",
+    "url": "/"
   }
 }
