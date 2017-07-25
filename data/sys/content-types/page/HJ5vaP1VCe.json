@@ -5,10 +5,13 @@
   "section": "",
   "url": "/up/",
   "body": "I tend to eliminate repetitive tasks at the earliest possible opportunity. It's partly because I'm lazy, but mostly because I don't like wasting time or energy. In other words, I appreciate efficiency.\r\n\r\nWhen on the command line I'm frequently moving between directories, often going several levels deep before having to resurface to move into another. Far too often this means I end up having to type:\r\n\r\n```\r\ncd ../../../../\r\n```\r\n\r\nThe solution was to write a small bash function in my _~/.bash\\_profile_. This is it:\r\n\r\n```\r\nfunction up {\r\n\r\n  cwd=$(pwd);\r\n  cds=\"\";\r\n  i=0;\r\n  \r\n\t# If we have an argument and it's > 1, proceed.\r\n  if [ $1 ] && [ $1 -gt 0 ]\r\n  then\r\n\r\n    i=$1\r\n\r\n    # Add the levels to the string.\r\n    while [ \"$i\" -ne \"0\" ]; do\r\n      cds=\"$cds../\";\r\n      i=$(expr $i - 1);\r\n    done\r\n\r\n    # Excute the command.\r\n    cd \"$cds\"\r\n  else                                                                          \r\n    cd ../\r\n  fi\r\n                                                                                \r\n}\r\n```\r\n\r\nNow, instead of a `cd` plus multiple `../`, I can just type:\r\n\r\n```\r\nup 4\r\n```\r\n\r\nIt was easier to write the function than find a script that already did the same thing. Feel free to use it.",
+  "featured-image": {
+    "src": ""
+  },
   "summary": "",
   "blog": "1",
   "created": "2017-03-15T13:55:49.000Z",
-  "updated": "2017-04-24T08:54:40.007Z",
+  "updated": "2017-07-25T00:08:14.551Z",
   "published": "2017-03-15T14:08:26.000Z",
   "contentType": "page",
   "id": "HJ5vaP1VCe"
