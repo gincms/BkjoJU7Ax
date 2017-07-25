@@ -5,10 +5,13 @@
   "section": "",
   "url": "/wordpress-asking-for-ftp-credentials/",
   "body": "### The symptom\r\n\r\nI tried to delete Hello Dolly and WordPress asked me for FTP credentials to perform the action.\r\n\r\n### The cause(s)\r\n\r\n#### Directory permissions/ownership\r\n\r\nThe WordPress directory wasn’t owned by Nginx. I fixed that quickly by `cd`ing into the directory of my WordPress installation and doing:\r\n\r\n```\r\nchown -R nginx:nginx . \r\n```\r\n\r\n#### Process ownership\r\n\r\nThe above didn’t resolve it though. As it happens PHP was running under a different user that didn’t have permission to access the files directly. In my case, `php-fpm` was running under `apache`, which it seems is the default configuration upon installation. I edited `/etc/php-fpm.d/www.conf` and changed:\r\n\r\n```\r\n; RPM: apache Choosed to be able to access some dir as httpd\r\nuser = apache\r\n\r\n; RPM: Keep a group allowed to write in log dir.\r\ngroup = apache\r\n```\r\n\r\nTo this:\r\n\r\n```\r\n; RPM: apache Choosed to be able to access some dir as httpd\r\nuser = nginx\r\n\r\n; RPM: Keep a group allowed to write in log dir.\r\ngroup = nginx\r\n```\r\n\r\nThen restarted `php-fpm`:\r\n\r\n```\r\nsudo service php-fpm restart`\r\n```\r\n\r\nAll sorted. No more request for FTP credentials. Now I can get on with more interesting things, like installing and playing with the [JSON API](https://wordpress.org/plugins/json-api/) plugin.\r\n\r\n\r\n",
+  "featured-image": {
+    "src": ""
+  },
   "summary": "",
   "blog": "1",
   "created": "2015-09-15T19:37:14.000Z",
-  "updated": "2017-04-22T17:16:41.094Z",
+  "updated": "2017-07-25T00:09:08.015Z",
   "published": "2015-09-15T19:37:14.000Z",
   "contentType": "page",
   "id": "ByZDawyVCg"
