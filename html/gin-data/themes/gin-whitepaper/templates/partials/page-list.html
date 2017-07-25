@@ -1,13 +1,13 @@
-<ul>
+<ul class="gin-content-list">
 {% for item in items %}
-  <li> 
+  <li class="gin-content-list__item"> 
     <article>
-      <p><a href="{{item.url}}">{{item.title}}</a></p>
+      <a href="{{item.url}}" class="gin-content-list__item-title">{{item.title}}</a>
       {% if item.subtitle %}
-      <p>{{item.subtitle}}</p>
+      <span class="gin-content-list__item-subtitle">— {{item.subtitle}}</span>
       {% endif %}
       {% if item.summary %}
-      <p>{{item.summary}}</p>
+      {{item.summary}}
       {% endif %}
     </article>
   </li>
