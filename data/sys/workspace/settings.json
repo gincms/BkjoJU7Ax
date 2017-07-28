@@ -6,6 +6,7 @@
     "url": "https://pricklydev.work",
     "theme": "gin-prickly-dev",
     "gaTrackingId": "UA-70657467-1",
-    "head": "<script>alert(\"hello!\");</script>"
+    "head": "",
+    "foot": ""
   }
 }
