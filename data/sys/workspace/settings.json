@@ -5,6 +5,7 @@
     "description": "A dev(ish), blog-type thing.",
     "url": "https://pricklydev.work",
     "theme": "gin-prickly-dev",
-    "gaTrackingId": "UA-70657467-1"
+    "gaTrackingId": "UA-70657467-1",
+    "foot": "<script>alert(\"hello!\");</script>"
   }
 }
