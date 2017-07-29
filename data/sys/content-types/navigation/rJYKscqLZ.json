@@ -1,9 +1,10 @@
 {
-  "label": "Menu",
-  "name": "menu",
+  "label": "Header menu",
+  "name": "header-menu",
+  "title": "",
   "structure": "* [Gin CMS](/gincms/ \"Gin CMS\")\r\n* [About me](/hire-me/ \"If you're interested in working with me\")\r\n* [Skills](/skills/ \"Skills\") \r\n\r\n---\r\n\r\n{{page count=5}} ",
   "contentType": "navigation",
   "url": "/undefined/",
-  "id": "BJibdqcUb",
-  "created": "2017-07-29T23:19:31.020Z"
+  "id": "rJYKscqLZ",
+  "created": "2017-07-29T23:34:24.829Z"
 }
