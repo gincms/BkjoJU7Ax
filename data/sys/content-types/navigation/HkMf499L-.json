@@ -1,9 +1,9 @@
 {
   "label": "Menu",
   "name": "menu",
-  "structure": "* [Gin CMS](/gincms/ \"Gin CMS\")\r\n* [About me](/hire-me/ \"If you're interested in working with me\") \r\n\r\n---\r\n\r\n{{page count=5}} ",
+  "structure": "* [Gin CMS](/gincms/ \"Gin CMS\")\r\n* [About me](/hire-me/ \"If you're interested in working with me\")\r\n* [Skills](/skills/ \"Skills\") \r\n\r\n---\r\n\r\n{{page count=5}} ",
   "contentType": "navigation",
   "url": "/undefined/",
   "id": "HkMf499L-",
-  "updated": "2017-07-29T23:06:10.856Z"
+  "updated": "2017-07-29T23:06:46.656Z"
 }
