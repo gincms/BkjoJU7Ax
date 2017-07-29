@@ -2,9 +2,9 @@
   "label": "Header menu",
   "name": "header-menu",
   "title": "",
-  "structure": "* [Gin CMS](/gincms/ \"Gin CMS\")\r\n* [About me](/hire-me/ \"If you're interested in working with me\")\r\n* [Skills](/skills/ \"Skills\") \r\n\r\n---\r\n\r\n{{list count=5}} ",
+  "structure": "* [Gin CMS](/gincms/ \"Gin CMS\")\r\n* [About me](/hire-me/ \"If you're interested in working with me\")\r\n* [Skills](/skills/ \"Skills\") \r\n\r\n---\r\n\r\n{{list}} ",
   "contentType": "navigation",
   "url": "/undefined/",
   "id": "rJYKscqLZ",
-  "updated": "2017-07-29T23:56:40.327Z"
+  "updated": "2017-07-29T23:57:06.437Z"
 }
