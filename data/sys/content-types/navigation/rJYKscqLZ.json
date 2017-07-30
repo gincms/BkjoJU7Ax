@@ -2,9 +2,9 @@
   "label": "Header menu",
   "name": "header-menu",
   "title": "",
-  "structure": "About me\r\n* [Work with me](/hire-me/ \"If you're interested in working with me\")\r\n* [Skills](/skills/ \"Skills\") \r\n  * [Nested item](/wordpress-cron-job-log-the-cronundrum/ \"Wordpress Cron Job Log (The Cronundrum)\")\r\n---\r\nLatest posts\r\n\r\n{{list type=page, count=5, nosub=true}} ",
+  "structure": "About me\r\n* [Work with me](/hire-me/ \"If you're interested in working with me\")\r\n* [Skills](/skills/ \"Skills\") \r\n  * [Nested item](/wordpress-cron-job-log-the-cronundrum/ \"Wordpress Cron Job Log (The Cronundrum)\")\r\n    *  [Another nested item](/up/)\r\n---\r\nLatest posts\r\n\r\n{{list type=page, count=5, nosub=true}} ",
   "contentType": "navigation",
   "url": "/undefined/",
   "id": "rJYKscqLZ",
-  "updated": "2017-07-30T00:17:41.920Z"
+  "updated": "2017-07-30T00:18:18.485Z"
 }
