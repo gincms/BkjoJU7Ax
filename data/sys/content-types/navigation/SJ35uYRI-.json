@@ -1,0 +1,10 @@
+{
+  "label": "My new navigation",
+  "name": "my-new-navigation",
+  "title": "This is navigation",
+  "structure": "* [If you're interested in working with me](/hire-me/ \"If you're interested in working with me\")\r\n* [Stuff](/wordpress-cron-job-log-the-cronundrum/ \"Wordpress Cron Job Log (The Cronundrum)\") ",
+  "created": "2017-08-01T23:02:43.824Z",
+  "updated": "",
+  "contentType": "navigation",
+  "id": "SJ35uYRI-"
+}
