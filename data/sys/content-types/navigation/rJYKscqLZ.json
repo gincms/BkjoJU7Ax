@@ -4,7 +4,8 @@
   "title": "",
   "structure": "About me\r\n* [Work with me](/hire-me/ \"If you're interested in working with me\")\r\n* [Skills](/skills/ \"Skills\") \r\n---\r\nLatest posts\r\n\r\n{{list type=page, count=5, nosub=true}} ",
   "created": "",
-  "updated": "2017-07-30T09:17:13.047Z",
+  "updated": "2017-07-30T09:20:41.261Z",
   "contentType": "navigation",
-  "id": "rJYKscqLZ"
+  "id": "rJYKscqLZ",
+  "published": "2017-07-30T09:20:41.261Z"
 }
