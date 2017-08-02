@@ -17,10 +17,17 @@ module.exports = {
       "type": "text",
       "placeholder": "Name"
     },
+    "summary": {
+      "name": "summary",
+      "label": "Summary",
+      "type": "textarea",
+      "placeholder": "Summary",
+      "editor": "markdown"
+    },
     "rating": {
       "name": "rating",
       "label": "Rating",
-      "type": "select",
+      "type": "radio",
       "placeholder": "Rating",
       "options": [
         {
@@ -48,13 +55,6 @@ module.exports = {
           "value": "5"
         }
       ]
-    },
-    "summary": {
-      "name": "summary",
-      "label": "Summary",
-      "type": "textarea",
-      "placeholder": "Summary",
-      "editor": "markdown"
     },
     "created": {
       "name": "created",
