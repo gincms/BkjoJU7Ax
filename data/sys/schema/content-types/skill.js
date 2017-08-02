@@ -5,7 +5,7 @@
 module.exports = {
   "name": "skill",
   "label": "Skill",
-  "plural": "Awesome skills",
+  "plural": "Skills",
   "icon": "university",
   "description": "Skills and experience I've acquired.",
   "timestamps": true,
