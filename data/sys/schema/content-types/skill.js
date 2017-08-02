@@ -6,7 +6,7 @@ module.exports = {
   "name": "skill",
   "label": "Skill",
   "icon": "university",
-  "description": "",
+  "description": "Skills and experience I've acquired.",
   "timestamps": true,
   "publishable": false,
   "fields": {
@@ -53,7 +53,7 @@ module.exports = {
       "label": "Summary",
       "type": "textarea",
       "placeholder": "Summary",
-      "editor": "plain"
+      "editor": "markdown"
     },
     "created": {
       "name": "created",
