@@ -13,14 +13,12 @@ module.exports = {
     "name": {
       "name": "name",
       "label": "Name",
-      "plural": "Names",
       "type": "text",
       "placeholder": "Name"
     },
     "rating": {
       "name": "rating",
       "label": "Rating",
-      "plural": "Ratings",
       "type": "select",
       "placeholder": "Rating",
       "options": [
@@ -53,7 +51,6 @@ module.exports = {
     "summary": {
       "name": "summary",
       "label": "Summary",
-      "plural": "Summarys",
       "type": "textarea",
       "placeholder": "Summary",
       "editor": "markdown"
