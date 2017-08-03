@@ -6,7 +6,7 @@ module.exports = {
   "name": "skill",
   "label": "Skill",
   "plural": "Skills",
-  "labelField": "name",
+  "labelField": "toast",
   "icon": "university",
   "description": "Skills and experience I've acquired.",
   "timestamps": true,
