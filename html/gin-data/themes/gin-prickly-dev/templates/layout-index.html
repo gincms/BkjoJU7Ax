@@ -29,12 +29,7 @@
   </div>
 </section>
 <footer class="footer">
-  <p class="has-text-centered">
-    <a href="https://twitter.com/LatnBlack">Twitter</a>
-  </p>
-  <p class="has-text-centered">
-    <a href="https://latnblack.com">me.com</a>
-  </p>
+  {{ nav("footer-menu") | safe }}
   {% block foot %}
   {% endblock%}
   {% if gin.site.gaTrackingId %}
