@@ -6,7 +6,6 @@ module.exports = {
   "name": "skill",
   "label": "Skill",
   "plural": "Skills",
-  "labelField": "name",
   "icon": "university",
   "description": "Skills and experience I've acquired.",
   "timestamps": true,
@@ -17,13 +16,6 @@ module.exports = {
       "label": "Name",
       "type": "text",
       "placeholder": "Name"
-    },
-    "summary": {
-      "name": "summary",
-      "label": "Summary",
-      "type": "textarea",
-      "placeholder": "Summary",
-      "editor": "markdown"
     },
     "rating": {
       "name": "rating",
@@ -56,6 +48,13 @@ module.exports = {
           "value": "5"
         }
       ]
+    },
+    "summary": {
+      "name": "summary",
+      "label": "Summary",
+      "type": "textarea",
+      "placeholder": "Summary",
+      "editor": "markdown"
     },
     "created": {
       "name": "created",
