@@ -4,14 +4,14 @@
   "slug": "custom-navigation-menus",
   "section": "gincms",
   "url": "/gincms/custom-navigation-menus/",
-  "body": "This week I've been looking at how to implement custom menus in Gin. Actually, I started looking at and working on it about three months ago, but then stopped all work on Gin—and coding in general—for reasons I won't go into just now. When I got back to the changes I'd started but abandoned, I continued the implementation but quickly realised it was over-engineered.\r\n\r\n### Over-engineering\r\n\r\nIn Gin, as in many a CMS, there's the concept of *content types*. The bonus is that Gin comes with the ability to create your own content types. Up until now, on Prickly Dev, I've only been using one: the humble *page*. My plan was to alter the application to support two new content types: navigation and navigation-item. I thought it would make sense because they would have their own properties, so it seems logical to normalise them. They would look something like this:\r\n\r\n`{\r\n   name: \"navigation\",\r\n\t label: \"Navigation\"\r\n}`\r\n\r\n\r\nI was trying to build out the navigation. Initial, when designing the content types I had wanted to keep them flat, but later decided it would be useful to be able reference a content-type from another content-type. Something like:\r\n\r\n*(Insert code sample here)*\r\n\r\nThis would allow the user creating a content type of, say",
+  "body": "This week I've been looking at how to implement custom menus in Gin. Actually, I started looking at and working on it about three months ago, but then stopped all work on Gin—and coding in general—for reasons I won't go into just now. When I got back to the changes I'd started but abandoned, I continued the implementation but quickly realised it was over-engineered.\r\n\r\n### Over-engineering\r\n\r\nIn Gin, as in many a CMS, there's the concept of *content types*. The bonus is that Gin comes with the ability to create your own content types. Up until now, on Prickly Dev, I've only been using one: the humble *page*. My plan was to alter the application to support two new content types: navigation and navigation-item. I thought it would make sense because they would have their own properties, so it seems logical to normalise them. They would look something like this:\r\n\r\n```{\r\n   name: \"navigation\",\r\n\t label: \"Navigation\"\r\n}```\r\n\r\n\r\nI was trying to build out the navigation. Initial, when designing the content types I had wanted to keep them flat, but later decided it would be useful to be able reference a content-type from another content-type. Something like:\r\n\r\n*(Insert code sample here)*\r\n\r\nThis would allow the user creating a content type of, say",
   "featured-image": {
     "src": ""
   },
   "summary": "",
   "blog": "1",
   "created": "2017-08-03T20:48:05.646Z",
-  "updated": "",
+  "updated": "2017-08-03T20:49:11.457Z",
   "published": "",
   "contentType": "page",
   "id": "rJAZ2W-vW"
