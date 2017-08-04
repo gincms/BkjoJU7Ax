@@ -4,14 +4,14 @@
   "slug": "custom-navigation-menus",
   "section": "gincms",
   "url": "/gincms/custom-navigation-menus/",
-  "body": "This week I've been looking at how to implement custom menus in Gin. Actually, I started looking at and working on it about three months ago, but then stopped all work on Gin—and coding in general—for reasons I won't go into just now. I wanted to keep the implementation and use as simple as possible. I ended up with this...\r\n\r\n### Creating  a menu\r\n\r\n*(insert markdown menu snippet here)*\r\n\r\nThe above will result in the following markup:\r\n\r\n*(markup here)*\r\n\r\n### What's happening under the hood\r\n\r\n#### Foundation\r\nThe nav is just a system content type, like the *page* content type that is used to write posts like the one you're reading. You could just create the equivalent using Gin's custom content type support. But, there's more. It has a textarea field that expects Markdown. You use this to design your menu. \r\n\r\n#### Rendering your nav\r\nOnce you have your nav, it can be used in a one of two ways:\r\n\r\nIt can be embedded in content using the `... {{list type=nav,limit=1}} ...` helper tag (known as *Elements* in Gin), or you can output it in a template using the `{{nav(\"my-nav\")}}`. \r\n\r\n",
+  "body": "This week I've been looking at how to implement custom menus in Gin. Actually, I started looking at and working on it about three months ago, but then stopped all work on Gin—and coding in general—for reasons I won't go into just now. I wanted to keep the implementation and use as simple as possible. I ended up with this...\r\n\r\n### Creating  a menu\r\n\r\n*(insert markdown menu snippet here)*\r\n\r\nThe above will result in the following markup:\r\n\r\n*(markup here)*\r\n\r\n### What's happening under the hood\r\n\r\n#### Foundation\r\nThe nav is just a system content type, like the *page* content type that is used to write posts like the one you're reading. You could just create the equivalent using Gin's custom content type support. But, there's more. It has a textarea field that expects Markdown. You use this to design your menu. \r\n\r\n#### Rendering your nav\r\nOnce you have your nav, it can be used in a one of two ways:\r\n\r\nIt can be embedded in content using the `... {{list type=nav,limit=1}} ...` helper tag (known as *Elements* in Gin), or you can output it in a template, like so: `{{ nav(\"my-nav\") }}`. \r\n\r\n",
   "featured-image": {
     "src": ""
   },
   "summary": "",
   "blog": "1",
   "created": "2017-08-03T20:48:05.646Z",
-  "updated": "2017-08-04T12:37:02.738Z",
+  "updated": "2017-08-04T12:37:50.212Z",
   "published": "",
   "contentType": "page",
   "id": "rJAZ2W-vW"
