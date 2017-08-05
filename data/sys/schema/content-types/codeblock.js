@@ -21,7 +21,8 @@ module.exports = {
       "name": "slug",
       "label": "Slug",
       "type": "slug",
-      "placeholder": "Slug"
+      "placeholder": "Slug",
+      "source": ".gin-text"
     },
     "language": {
       "name": "language",
