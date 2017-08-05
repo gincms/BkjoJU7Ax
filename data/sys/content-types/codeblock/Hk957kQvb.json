@@ -1,0 +1,10 @@
+{
+  "title": "Footer menu HTML",
+  "slug": "footer-menu-html",
+  "language": "javascript",
+  "code": "<ul class=\"gin-navigation\">\r\n\t<li>\r\n  \t<a href=\"https://twitter.com/LatnBlack\">Twitter</a>\r\n  </li>\r\n  <li>\r\n  \t<a href=\"https://latnblack.com\">me.com</a>\r\n  </li>\r\n</ul>",
+  "contentType": "codeblock",
+  "url": "/footer-menu-html/",
+  "id": "Hk957kQvb",
+  "created": "2017-08-05T06:20:01.671Z"
+}
