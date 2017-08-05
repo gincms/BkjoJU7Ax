@@ -2,9 +2,9 @@
   "title": "Footer menu HTML",
   "slug": "footer-menu-html",
   "language": "htmlmixed",
-  "code": "<ul class=\"gin-navigation\">\r\n\t\t<li>\r\n  \t\t\t<a href=\"https://twitter.com/LatnBlack\">Twitter</a>\r\n  \t</li>\r\n  \t<li>\r\n  \t\t\t<a href=\"https://latnblack.com\">me.com</a>\r\n  \t</li>\r\n</ul>",
+  "code": "<ul class=\"gin-navigation\">\r\n  <li>\r\n    <a href=\"https://twitter.com/LatnBlack\">Twitter</a>\r\n  </li>\r\n  <li>\r\n    <a href=\"https://latnblack.com\">me.com</a>\r\n  </li>\r\n</ul>",
   "contentType": "codeblock",
   "url": "/footer-menu-html/",
   "id": "Hk957kQvb",
-  "updated": "2017-08-05T07:45:08.089Z"
+  "updated": "2017-08-05T13:57:06.313Z"
 }
