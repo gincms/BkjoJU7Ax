@@ -24,27 +24,27 @@ module.exports = {
       "placeholder": "Rating",
       "options": [
         {
-          "label": "0",
+          "label": "Never touched it",
           "value": "0"
         },
         {
-          "label": "1",
+          "label": "Have dabbled",
           "value": "1"
         },
         {
-          "label": "2",
+          "label": "Use it occasionally",
           "value": "2"
         },
         {
-          "label": "3",
+          "label": "Use it regularly",
           "value": "3"
         },
         {
-          "label": "4",
+          "label": "Know it well",
           "value": "4"
         },
         {
-          "label": "5",
+          "label": "I'm a master",
           "value": "5"
         }
       ]
