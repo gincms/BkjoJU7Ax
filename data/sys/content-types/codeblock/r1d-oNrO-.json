@@ -2,9 +2,9 @@
   "title": "React: Greeting",
   "slug": "react-greeting",
   "language": "javascript",
-  "code": "(function() {\r\n  var Greeting = React.createElement( \r\n    \"div\",\r\n    {className: \"greeting\"},\r\n    \"Hi!\"\r\n  );\r\n\r\nReactDOM.render(\r\n  Greeting,\r\n  document.getElementById('pdtr-app')\r\n);\r\n})()",
+  "code": "(function() {\r\n  var Greeting = React.createElement( \r\n    \"div\",\r\n    {className: \"greeting\"},\r\n    \"Hi!\"\r\n  );\r\n\r\n  ReactDOM.render(\r\n    Greeting,\r\n    document.getElementById('pdtr-app')\r\n  );\r\n})()",
   "contentType": "codeblock",
   "url": "/react-greeting/",
   "id": "r1d-oNrO-",
-  "updated": "2017-08-19T04:32:50.902Z"
+  "updated": "2017-08-19T04:33:29.916Z"
 }
