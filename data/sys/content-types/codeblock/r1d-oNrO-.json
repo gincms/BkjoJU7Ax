@@ -1,0 +1,10 @@
+{
+  "title": "React: Greeting",
+  "slug": "react-greeting",
+  "language": "javascript",
+  "code": "class Greeting extends React.Component {\r\n  render() {\r\n    return (\r\n\t\t\t<div className=\"greeting\">Hi!</div>\r\n    );\r\n  }\r\n}\r\n\r\nReactDOM.render(\r\n  <Greeting />,\r\n  document.getElementById('pdtr-app')\r\n);",
+  "contentType": "codeblock",
+  "url": "/react-greeting/",
+  "id": "r1d-oNrO-",
+  "created": "2017-08-19T04:13:51.863Z"
+}
