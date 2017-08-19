@@ -4,13 +4,13 @@
   "slug": "tiny-reactor",
   "section": "",
   "url": "/tiny-reactor/",
-  "body": "<span id=\"pdtr-app\">Hello!</span> This space is nothing more than a ReactJS playground.\r\n<script>\r\n\t{{embed type=codeblock id=slug slug=react-greeting fields=code inline}}\r\n</script>\r\n{{embed type=codeblock id=slug slug=react-greeting fields=code}}",
+  "body": "<span id=\"pdtr-app\">Hello</span>! I'm a tiny React app! This space is nothing more than a ReactJS playground.\r\n<script>\r\n\t{{embed type=codeblock id=slug slug=react-greeting fields=code inline}}\r\n</script>\r\n{{embed type=codeblock id=slug slug=react-greeting fields=code}}",
   "featured-image": {
     "src": ""
   },
   "summary": "",
   "created": "2017-08-01T11:01:46.183Z",
-  "updated": "2017-08-19T08:25:23.453Z",
+  "updated": "2017-08-19T08:27:25.352Z",
   "published": "",
   "contentType": "page",
   "id": "ryGsJJCLb"
