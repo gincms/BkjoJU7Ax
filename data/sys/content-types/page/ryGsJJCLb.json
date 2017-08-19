@@ -4,13 +4,13 @@
   "slug": "tiny-reactor",
   "section": "",
   "url": "/tiny-reactor/",
-  "body": "<div id=\"pdtr-app\"></div>\r\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.min.js\"></script>\r\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.min.js\"></script>\r\n<script>\r\n\t{{embed type=codeblock id=slug slug=react-greeting fields=code inline}}\r\n</script>\r\n{{embed type=codeblock id=slug slug=react-greeting fields=code}}",
+  "body": "This space is nothing more than a ReactJS playground.\r\n\r\n<div id=\"pdtr-app\"></div>\r\n<script>\r\n\t{{embed type=codeblock id=slug slug=react-greeting fields=code inline}}\r\n</script>\r\n{{embed type=codeblock id=slug slug=react-greeting fields=code}}",
   "featured-image": {
     "src": ""
   },
   "summary": "",
   "created": "2017-08-01T11:01:46.183Z",
-  "updated": "2017-08-19T04:33:48.869Z",
+  "updated": "2017-08-19T05:02:42.353Z",
   "published": "",
   "contentType": "page",
   "id": "ryGsJJCLb"
