@@ -2,9 +2,9 @@
   "title": "React: Greeting",
   "slug": "react-greeting",
   "language": "javascript",
-  "code": "void function() {\r\n  var e = React.createElement;\r\n  var hours = new Date().getHours();\r\n  var morning = new Array(12);\r\n  var afternoon = new Array(17);\r\n  var greeting;\r\n  \r\n  if (hours < morning.length) {\r\n    greeting = \"Good morning\"\r\n  }\r\n  else if (hours < afternoon.length) {\r\n    greeting = \"Hello there\"\r\n  } \r\n  else {\r\n    greeting = \"Good evening\"\r\n  }\r\n  \r\n  var intro = e( \r\n    \"div\", \r\n    { className: \"greeting\" },\r\n    `${greeting}! I'm a tiny React app!`\r\n  );\r\n\r\n  ReactDOM.render(\r\n    greeting,\r\n    document.getElementById('pdtr-app')\r\n  );\r\n}()",
+  "code": "void function() {\r\n  var e = React.createElement;\r\n  var hours = new Date().getHours();\r\n  var morning = new Array(12);\r\n  var afternoon = new Array(17);\r\n  var greeting;\r\n  \r\n  if (hours < morning.length) {\r\n    greeting = \"Good morning\"\r\n  }\r\n  else if (hours < afternoon.length) {\r\n    greeting = \"Hello there\"\r\n  } \r\n  else {\r\n    greeting = \"Good evening\"\r\n  }\r\n  \r\n  var intro = e( \r\n    \"div\", \r\n    { className: \"greeting\" },\r\n    `${greeting}! I'm a tiny React app!`\r\n  );\r\n\r\n  ReactDOM.render(\r\n    intro,\r\n    document.getElementById('pdtr-app')\r\n  );\r\n}()",
   "contentType": "codeblock",
   "url": "/react-greeting/",
   "id": "r1d-oNrO-",
-  "updated": "2017-08-19T04:56:08.600Z"
+  "updated": "2017-08-19T04:56:30.586Z"
 }
