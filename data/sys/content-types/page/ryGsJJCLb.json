@@ -4,13 +4,13 @@
   "slug": "tiny-reactor",
   "section": "",
   "url": "/tiny-reactor/",
-  "body": "<div id=\"pdtr-app\"></div>\r\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.min.js\"></script>\r\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.min.js\"><script>\r\n<script>\r\n\tclass Greeting extends React.Component {\r\n  render() {\r\n    return (\r\n\t\t\t<div className=\"shopping-list\">Hi!</div>\r\n    );\r\n  }\r\n}\r\n\r\nReactDOM.render(\r\n  <Greeting />,\r\n  document.getElementById('pdtr-app')\r\n);\r\n</script>",
+  "body": "<div id=\"pdtr-app\"></div>\r\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.min.js\"></script>\r\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.min.js\"></script>\r\n<script>\r\n\tclass Greeting extends React.Component {\r\n  render() {\r\n    return (\r\n\t\t\t<div className=\"greeting\">Hi!</div>\r\n    );\r\n  }\r\n}\r\n\r\nReactDOM.render(\r\n  <Greeting />,\r\n  document.getElementById('pdtr-app')\r\n);\r\n</script>",
   "featured-image": {
     "src": ""
   },
   "summary": "",
   "created": "2017-08-01T11:01:46.183Z",
-  "updated": "2017-08-19T04:02:07.571Z",
+  "updated": "2017-08-19T04:04:04.922Z",
   "published": "",
   "contentType": "page",
   "id": "ryGsJJCLb"
