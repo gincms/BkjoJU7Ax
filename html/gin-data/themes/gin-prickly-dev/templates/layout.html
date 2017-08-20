@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head data-gincb="{{gin.cacheBuster}}">
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="{{gin.site.description}}">
   <title>{% block title %}{{gin.site.name}}{% endblock %}</title>
   <link rel="stylesheet" href="{{asset('css/main.css')}}">
+  <link rel="canonical" href="{{url()}}">
   {{ head() | safe }}
 </head>
 <body>
