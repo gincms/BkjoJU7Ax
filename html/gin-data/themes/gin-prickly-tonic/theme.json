@@ -1,0 +1,8 @@
+{
+  "name": "gin-prickly-tonic",
+  "title": "Prickly Tonic",
+  "description": "Prickly Dev Gin theme.",
+  "image": "screenshot.png",
+  "version": "1.0.7",
+  "repository": "git@bitbucket.org:latnblack/gin-prickly-tonic.git"
+}

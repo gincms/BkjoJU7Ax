@@ -1,0 +1,3 @@
+[submodule "html/gin-data/themes/.repos/gin-prickly-tonic"]
+	path = html/gin-data/themes/.repos/gin-prickly-tonic
+	url = git@bitbucket.org:latnblack/gin-prickly-tonic.git
