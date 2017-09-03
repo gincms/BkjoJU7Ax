@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="en"> <head data-gincb="1503271101749"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width,initial-scale=1"> <meta name="description" content="A dev(ish), blog-type thing."> <title>Up - Prickly Dev</title> <link rel="stylesheet" href="/gin-data/themes/gin-prickly-dev/css/main.css"> <link rel="canonical" href="https://pricklydev.work/up/"> <!-- Gin head --><!-- /Gin head --> </head> <body> <article> <section class="section"> <div class="container"> <div class="columns"> <div class="column is-10 is-offset-1 is-6-desktop is-offset-3-desktop"> <div class="heading"> <h1 class="title"> <a href="/up/">Up</a> </h1> </div> <div class="gin-nav-back"> <a href="/">&larr; Back</a> </div> </div> </div> </div> </section> <section class="section"> <div class="container"> <div class="columns"> <div class="column is-10 is-offset-1 is-6-desktop is-offset-3-desktop"> <div id="primary-content" class="content"> <article> <section class="content-body"> <p>I tend to eliminate repetitive tasks at the earliest possible opportunity. It&#39;s partly because I&#39;m lazy, but mostly because I don&#39;t like wasting time or energy. In other words, I appreciate efficiency.</p> <p>When on the command line I&#39;m frequently moving between directories, often going several levels deep before having to resurface to move into another. Far too often this means I end up having to type:</p> <pre><code>cd ../../../../
+<!DOCTYPE html> <html lang="en"> <head data-gincb="1504400916459"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width,initial-scale=1"> <meta name="description" content="A dev(ish), blog-type thing."> <title>Up - Prickly Dev</title> <link rel="stylesheet" href="/gin-data/themes/gin-prickly-tonic/css/main.css"> <link rel="canonical" href="https://pricklydev.work/up/"> <!-- Gin head --><!-- /Gin head --> </head> <body> <article> <section class="section"> <div class="container"> <div class="columns"> <div class="column is-10 is-offset-1 is-6-desktop is-offset-3-desktop"> <div class="heading"> <h1 class="title"> <a href="/up/">Up</a> </h1> </div> <div class="gin-nav-back"> <a href="/">&larr; Back</a> </div> </div> </div> </div> </section> <section class="section"> <div class="container"> <div class="columns"> <div class="column is-10 is-offset-1 is-6-desktop is-offset-3-desktop"> <div id="primary-content" class="content"> <article> <section class="content-body"> <p>I tend to eliminate repetitive tasks at the earliest possible opportunity. It&#39;s partly because I&#39;m lazy, but mostly because I don&#39;t like wasting time or energy. In other words, I appreciate efficiency.</p> <p>When on the command line I&#39;m frequently moving between directories, often going several levels deep before having to resurface to move into another. Far too often this means I end up having to type:</p> <pre><code>cd ../../../../
 </code></pre><p>The solution was to write a small bash function in my <em>~/.bash_profile</em>. This is it:</p> <pre><code>function up {
 
   cwd=$(pwd);
@@ -19,53 +19,15 @@
 
     # Excute the command.
     cd &quot;$cds&quot;
-  else<br>    cd ../
+  else                                                                          
+    cd ../
   fi
 
 }
-</code></pre><p>Now, instead of a <code>cd</code> plus multiple <code>../</code>, I can just type:</p>
-<pre><code>up 4
-</code></pre><p>It was easier to write the function than find a script that already did the same thing. Feel free to use it.</p>
-
-      </section>
-    </article>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</article>
-<footer class="footer has-text-centered">
-  
-      <ul class="gin-navigation">
-        <li>
-      <a href="https://twitter.com/LatnBlack" title="Twitter" class="gin-navigation__link">
-        Twitter
-      </a></li>
-<li>
-      <a href="https://latnblack.com" title="me.com" class="gin-navigation__link">
-        me.com
-      </a></li>
-
-      </ul>
-  
-  
-</footer>
-<!-- Gin foot -->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.min.js"></script>
-    
- <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+</code></pre><p>Now, instead of a <code>cd</code> plus multiple <code>../</code>, I can just type:</p> <pre><code>up 4
+</code></pre><p>It was easier to write the function than find a script that already did the same thing. Feel free to use it.</p> </section> </article> </div> </div> </div> </div> </section> </article> <footer class="footer has-text-centered"> <ul class="gin-navigation"> <li> <a href="https://twitter.com/LatnBlack" title="Twitter" class="gin-navigation__link"> Twitter </a></li> <li> <a href="https://latnblack.com" title="me.com" class="gin-navigation__link"> me.com </a></li> </ul> </footer> <!-- Gin foot --> <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.min.js"></script> <script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
   ga('create', 'UA-70657467-1', 'auto');
-  ga('send', 'pageview');
-</script>
-
-      <!-- /Gin foot -->
-</body>
-</html> 
+  ga('send', 'pageview'); </script> <!-- /Gin foot --> </body> </html> 
